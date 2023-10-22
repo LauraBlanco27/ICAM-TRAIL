@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'Galeria2.dart';
 import 'Senderos.dart';
 
