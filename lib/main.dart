@@ -1,20 +1,54 @@
-import 'dart:convert';
-import 'dart:html';
-
-import 'package:crypto/crypto.dart';
+import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
-import 'package:local_auth/auth_strings.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
+import 'View/Servicios.dart';
+import 'firebase_options.dart';
 import 'DTO/User.dart';
 import 'View/Login.dart';
-import 'firebase_options.dart';
-import 'package:local_auth/local_auth.dart';
-import "package:google_fonts/google_fonts.dart";
+import 'View/constants.dart';
 
+void main() async {
+  await dotenv
+      .load(); // Asegúrate de que esta es la manera correcta de cargar tus variables de entorno
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() => runApp(MyApp());
+  runApp(
+    MaterialApp(
+      home:
+          FirebaseInitializer(), // Asumiendo que FirebaseInitializer es un widget
+    ),
+  );
+}
+
+class FirebaseInitializer extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return ErrorApp();
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MyApp();
+        }
+        return MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -40,31 +74,35 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (_) => LoginPage()),
-      );
-    });
+    _loadResourcesAndNavigate();
+  }
+
+  Future<void> _loadResourcesAndNavigate() async {
+    await Future.delayed(Duration(seconds: 3));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => LoginPage()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      backgroundColor: Color(0xFF072931),
+      backgroundColor: kPrimaryColor,
       body: Stack(
         children: [
           Center(
-            child: Align(
-              alignment: Alignment.center,
-              child: Image.asset(
-                'ima/LogoAppI.png',
-                width: 150,
-                height: 150,
-              ),
+            child: Image.asset(
+              'ima/LogoAppI.png',
+              width: 0.4 * width,
+              height: 0.4 * height,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 30),
+            padding: EdgeInsets.only(bottom: 0.05 * height),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -72,17 +110,31 @@ class _SplashScreenState extends State<SplashScreen> {
                   alignment: Alignment.center,
                   child: Text(
                     'Created by',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style:
+                        TextStyle(color: kTextColor, fontSize: kTextSizeLarge),
                   ),
                 ),
                 Text(
                   'WhiteTeam',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  style: TextStyle(color: kTextColor, fontSize: kTextSizeSmall),
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ErrorApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('Esta plataforma no está soportada'),
+        ),
       ),
     );
   }

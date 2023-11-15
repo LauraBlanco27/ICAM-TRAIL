@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto1/View/PagPrincipal.dart';
-
 import 'AgriculturaConservacion.dart';
+import 'Apicultura.dart';
 import 'HuertoFamiliar.dart';
 import 'Invernadero.dart';
 import 'Lombricomposta.dart';
+import 'Perfil.dart';
 import 'ReservorioAgua.dart';
 import 'RiegoEficiente.dart';
 import 'Silvopastoril.dart';
@@ -12,14 +13,12 @@ import 'SistemaSilvoagricola.dart';
 import 'TerrazasAgricolas.dart';
 import 'ZanjaBordo.dart';
 
-// Aquí van las demás importaciones ...
-
 class Proyectos extends StatelessWidget {
+  const Proyectos({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
+    return MyHomePage();
   }
 }
 
@@ -29,9 +28,9 @@ class MyHomePage extends StatelessWidget {
     'Invernadero',
     'Riego Eficiente',
     'Terrazas Agrícolas',
-    'Zanja Bordo',
     'Sistema Silvoagricola',
     'Agricultura de Conservación',
+    'Apicultura',
     'Huerto Familiar',
     'Silvopastoril',
     'Reservorio de Agua'
@@ -42,108 +41,150 @@ class MyHomePage extends StatelessWidget {
     Invernadero(),
     RiegoEficiente(),
     TerrazasAgricolas(),
-    ZanjaBordo(),
     SistemaSilvoagricola(),
     AgriculturaConservacion(),
+    Apicultura(),
     HuertoFamiliar(),
     Silvopastoril(),
     ReservorioAgua(),
   ];
 
+  final List<String> proyectosImagenes = [
+    'ima/lombriz.png',
+    'ima/IconoInver.png',
+    'ima/aspersor.png',
+    'ima/IconoInver.png',
+    'ima/lombriz.png',
+    'ima/IconoInver.png',
+    'ima/abeja.png',
+    'ima/regadera.png',
+    'ima/vacas.png',
+    'ima/deposito-de-agua.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
-      body: Column(
-        children: [
-          Container(
-            height: 40,
-            color: Color(0xffd9d9d9),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      backgroundColor: const Color(0xff224C55),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Column(
               children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios_new),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (_) => PagPrincipal()),
-                    );
-                  },
-                ),
-                Text(
-                  'Proyectos Educativos',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 30),
-              ],
-            ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(10.0),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 30.0,
-                mainAxisSpacing: 30.0,
-                childAspectRatio: 1.6667,
-              ),
-              itemCount: proyectosNombres.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => paginas[index]),
-                    );
-                  },
-                  child: Text(
-                    proyectosNombres[index],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromRGBO(7, 41, 49, 0.5), // Color de fondo con transparencia
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(
-                        color: Colors.blue[300]!, // Borde azul más claro
-                        width: 3.0, // Ajusta el ancho del borde a tu preferencia
+                Container(
+                  color: const Color(0xffd9d9d9),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back_ios_new),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (_) => const PagPrincipal()),
+                          );
+                        },
                       ),
-                    ),
+                      const Text(
+                        'Proyectos Educativos',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 30),
+                    ],
                   ),
-                );
-              },
-            ),
-          ),
-          Container(
-            height: 40,
-            color: Color(0xff072931),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.home, color: Color(0xffd9d9d9)),
-                  onPressed: () {},
                 ),
-                IconButton(
-                  icon: Icon(Icons.search, color: Color(0xffd9d9d9)),
-                  onPressed: () {},
+                Expanded(
+                  child: GridView.builder(
+                    padding: const EdgeInsets.all(10.0),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: (constraints.maxWidth < 600) ? 2 : 3,
+                      crossAxisSpacing: 30.0,
+                      mainAxisSpacing: 30.0,
+                      childAspectRatio: 1.6667,
+                    ),
+                    itemCount: proyectosNombres.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => paginas[index]),
+                            );
+                          },
+                          borderRadius: BorderRadius.circular(20),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(7, 41, 49, 0.5),
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(0xffecf8e5),
+                                  spreadRadius: 0,
+                                  blurRadius: 8,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    proyectosImagenes[index], // Usando la imagen correspondiente
+                                    width: 50.0, // Ajusta según tus necesidades
+                                    height: 50.0,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    proyectosNombres[index],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: (constraints.maxWidth < 600) ? 16 : 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                  ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.person, color: Color(0xffd9d9d9)),
-                  onPressed: () {},
+                Container(
+                  color: const Color(0xff072931),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.home, color: Color(0xffd9d9d9)),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (_) => const PagPrincipal()),
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.person, color: Color(0xffd9d9d9)),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (_) => const Perfil()),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
     );
   }
