@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'PagPrincipal.dart';
 import 'Perfil.dart';
 import 'Proyectos.dart';
 
 class AgriculturaConservacion extends StatefulWidget {
+  const AgriculturaConservacion({super.key});
+
   @override
   _AgriculturaConservacionState createState() =>
       _AgriculturaConservacionState();
@@ -18,17 +19,17 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
     double screenHeight = MediaQuery.of(context).size.height;
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xffECF8E5),
+        backgroundColor: const Color(0xffECF8E5),
         appBar: AppBar(
-          backgroundColor: Color(0xffd9d9d9),
+          backgroundColor: const Color(0xffd9d9d9),
           toolbarHeight: screenHeight * 0.05,
           elevation: 0.0,
           leading: IconButton(
-            icon: Icon(color: Colors.black, Icons.arrow_back_ios_new),
+            icon: const Icon(color: Colors.black, Icons.arrow_back_ios_new),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (_) => Proyectos()),
+                MaterialPageRoute(builder: (_) => const Proyectos()),
               );
             },
           ),
@@ -75,8 +76,8 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 35),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 35),
                   child: Text(
                     'AGRICULTURA DE CONSERVACIÓN',
                     textAlign: TextAlign.center,
@@ -98,36 +99,36 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0xff5EC57E),
+                      backgroundColor: const Color(0xff5EC57E),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding:
-                      EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                     ),
                     child:
-                    Text('Comienza ahora', style: TextStyle(fontSize: 18)),
+                    const Text('Comienza ahora', style: TextStyle(fontSize: 18)),
                   ),
                 ),
                 Visibility(
                   visible: _mostrarInformacion,
                   child: Column(
                     children: [
-                      Icon(Icons.arrow_downward, size: 30, color: Color(0xff5EC57E)),
+                      const Icon(Icons.arrow_downward, size: 30, color: Color(0xff5EC57E)),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Image.asset('ima/Obj1.png'),
                       ),
-                      Text(
+                      const Text(
                         'Objetivos de Aprendizaje',
                         style: TextStyle(
                             color: Color(0xff5EC57E),
                             fontWeight: FontWeight.bold,
                             fontSize: 24),
                       ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
+                      const SizedBox(height: 10),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,16 +148,16 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         padding: const EdgeInsets.all(20.0),
                         child: Image.asset('ima/Mat1.png'),
                       ),
-                      Text(
+                      const Text(
                         'Materiales',
                         style: TextStyle(
                             color: Color(0xff5EC57E),
                             fontWeight: FontWeight.bold,
                             fontSize: 24),
                       ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
+                      const SizedBox(height: 10),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,22 +189,22 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         padding: const EdgeInsets.all(20.0),
                         child: Image.asset('ima/Idea1.png'),
                       ),
-                      Text(
+                      const Text(
                         '1. Introducción a la medida (10 min)',
                         style: TextStyle(
                             color: Color(0xff347571),
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 100.0),
@@ -229,13 +230,13 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
-                          color: Color(0xffECF8E5),
+                          color: const Color(0xffECF8E5),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 50.0),
@@ -268,8 +269,8 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
@@ -277,35 +278,35 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 50.0),
+                              padding: const EdgeInsets.only(top: 50.0),
                               child: Image.asset('ima/Intro1.png'),
                             ),
-                            Text(
+                            const Text(
                               '\nEl suelo se cubre con arrope para que haya mas materia orgánica y se mantenga la humedad del suelo.',
                               textAlign: TextAlign.center,
                               style:
                               TextStyle(fontSize: 18),
                             ),
-                            SizedBox(height: 10),
-                            Padding(
+                            const SizedBox(height: 10),
+                            const Padding(
                               padding: EdgeInsets.only(bottom: 50.0),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
-                          color: Color(0xff366A3F),
+                          color: const Color(0xff366A3F),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 5.0),
+                              padding: const EdgeInsets.only(top: 5.0),
                               child: Container(
-                                padding: EdgeInsets.all(10.0),
-                                child: Center(
+                                padding: const EdgeInsets.all(10.0),
+                                child: const Center(
                                   child: Text(
                                     '2. Capacitación',
                                     style: TextStyle(
@@ -317,24 +318,24 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 0.5),
-                            Padding(
+                            const SizedBox(height: 0.5),
+                            const Padding(
                               padding: EdgeInsets.only(bottom: 10.0),
                             ),
                           ],
                         ),
                         width: MediaQuery.of(context).size.width,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 35,
                             height: 35,
                             child: Image.asset('ima/Señor.png'),
                           ),
-                          SizedBox(width: 2),
-                          Flexible(
+                          const SizedBox(width: 2),
+                          const Flexible(
                             child: Text(
                               'a) Preparación del terreno y siembra (20 min)',
                               style: TextStyle(
@@ -348,15 +349,15 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         ],
                         mainAxisAlignment: MainAxisAlignment.center,
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 100.0),
@@ -382,13 +383,13 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
-                          color: Color(0xffECF8E5),
+                          color: const Color(0xffECF8E5),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 50.0),
@@ -409,8 +410,8 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
@@ -418,23 +419,23 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 50.0),
+                              padding: const EdgeInsets.only(top: 50.0),
                               child: Image.asset('ima/Capacitacion.png'),
                             ),
-                            Text(
+                            const Text(
                               '\nEl suelo no se voltea. Para descompostarlo se puede usar con arado de cincel.',
                               textAlign: TextAlign.center,
                               style:
                               TextStyle(fontSize: 18),
                             ),
-                            SizedBox(height: 10),
-                            Padding(
+                            const SizedBox(height: 10),
+                            const Padding(
                               padding: EdgeInsets.only(bottom: 50.0),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Container(
                         decoration: BoxDecoration(
                           border: Border(
@@ -444,10 +445,10 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                             ),
                           ),
                         ),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             bottom:
                             15), // Espacio vertical entre el texto y la línea
-                        child: Text(
+                        child: const Text(
                           'b) Los abonos verdes y la rotación de cultivos (20 min)',
                           style: TextStyle(
                             color: Color(0xff347571),
@@ -458,13 +459,13 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 20.0),
@@ -494,13 +495,13 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 170, // Ancho deseado
                             height: 170, // Alto deseado
                             child: Image.asset('ima/Siembra.png'), // Reemplaza con la ruta de tu imagen
                           ),
-                          SizedBox(width: 10), // Espacio entre la imagen y el texto
-                          Expanded(
+                          const SizedBox(width: 10), // Espacio entre la imagen y el texto
+                          const Expanded(
                             child: Text(
                               'Hay herramientas específicas para la siembra directa, como esta hoyadora en la que la semilla se pone en un lado y el abono en el otro.',
                               style: TextStyle(fontSize: 18),
@@ -510,14 +511,14 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                       ),
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               'Al cubrir el suelo y no voltearlo se va formando una capa nueva de suelo fértil',
                               style: TextStyle(fontSize: 18),
                             ),
                           ),
-                          SizedBox(width: 16), // Espacio entre el texto y la imagen
-                          Container(
+                          const SizedBox(width: 16), // Espacio entre el texto y la imagen
+                          SizedBox(
                             width: 170, // Ancho deseado
                             height: 170, // Alto deseado
                             child: Image.asset('ima/Siembra2.png'), // Reemplaza con la ruta de tu imagen
@@ -533,10 +534,10 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                             ),
                           ),
                         ),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             bottom:
                             15), // Espacio vertical entre el texto y la línea
-                        child: Text(
+                        child: const Text(
                           'c) Explicación de la medida (10 min)',
                           style: TextStyle(
                             color: Color(0xff347571),
@@ -547,13 +548,13 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 20.0),
@@ -582,29 +583,29 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                       ),
                       Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 200, // Ancho deseado
                             height: 170, // Alto deseado
                             child: Image.asset('ima/imaC.png'),
                           ),
-                          SizedBox(height: 0.1),
-                          Text(
+                          const SizedBox(height: 0.1),
+                          const Text(
                             'Los residuos de cosecha son un excelente arrope. Es importante dejarlos en el suelo y nunca quemarlos.',
                             style: TextStyle(fontSize: 18),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Container(
-                            color: Color(0xffE4DDDD),
-                            padding: EdgeInsets.all(8.0), // Añade un poco de relleno alrededor
+                            color: const Color(0xffE4DDDD),
+                            padding: const EdgeInsets.all(8.0), // Añade un poco de relleno alrededor
                             child: Row(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 70,
                                   height: 70,
                                   child: Image.asset('ima/Tip.png'),
                                 ),
-                                SizedBox(width: 10),
-                                Expanded(
+                                const SizedBox(width: 10),
+                                const Expanded(
                                   child: Text(
                                     'La agricultura de conservación no necesita de gastos adicionales. Al contrario, con menos trabajo y menos insumos químicos se pueden obtener mejores rendimientos. Pero necesita un cambio de mentalidad al pensar en el sistema productivo de forma integral. Los resultados de este sistema se empiezan a notar después de unas cuantas campañas.',
                                     style: TextStyle(fontSize: 12),
@@ -625,7 +626,7 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
         ),
         bottomNavigationBar: Container(  // Usamos `bottomNavigationBar` para la barra inferior
           height: screenHeight * 0.05,
-          color: Color(0xff072931),
+          color: const Color(0xff072931),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -634,20 +635,16 @@ class _AgriculturaConservacionState extends State<AgriculturaConservacion> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => PagPrincipal()),
+                    MaterialPageRoute(builder: (_) => const PagPrincipal()),
                   );
                 },
               ),
               IconButton(
-                icon: Icon(Icons.search, color: Color(0xffd9d9d9)),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.person, color: Color(0xffd9d9d9)),
+                icon: const Icon(Icons.person, color: Color(0xffd9d9d9)),
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => Perfil()),
+                    MaterialPageRoute(builder: (_) => const Perfil()),
                   );
                 },
               ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'PagPrincipal.dart';
 import 'Perfil.dart';
 import 'Proyectos.dart';
 
 class Lombricomposta extends StatefulWidget {
+  const Lombricomposta({super.key});
+
   @override
   _LombricompostaState createState() =>
       _LombricompostaState();
@@ -18,17 +19,17 @@ class _LombricompostaState extends State<Lombricomposta> {
     double screenHeight = MediaQuery.of(context).size.height;
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xffECF8E5),
+        backgroundColor: const Color(0xffFFFFFF),
         appBar: AppBar(
-          backgroundColor: Color(0xffd9d9d9),
+          backgroundColor: const Color(0xffd9d9d9),
           toolbarHeight: screenHeight * 0.05,
           elevation: 0.0,
           leading: IconButton(
-            icon: Icon(color: Colors.black, Icons.arrow_back_ios_new),
+            icon: const Icon(color: Colors.black, Icons.arrow_back_ios_new),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (_) => Proyectos()),
+                MaterialPageRoute(builder: (_) => const Proyectos()),
               );
             },
           ),
@@ -45,7 +46,7 @@ class _LombricompostaState extends State<Lombricomposta> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Image.asset(
-                          'ima/Onu.png',
+                          'ima/ApiONU.png',
                           fit: BoxFit.contain,
                           width: MediaQuery.of(context).size.width * 0.2,
                         ),
@@ -56,7 +57,7 @@ class _LombricompostaState extends State<Lombricomposta> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Image.asset(
-                          'ima/Meba.png',
+                          'ima/ApiMEBA.png',
                           fit: BoxFit.contain,
                           width: MediaQuery.of(context).size.width * 0.2,
                         ),
@@ -67,7 +68,7 @@ class _LombricompostaState extends State<Lombricomposta> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Image.asset(
-                          'ima/Log.png',
+                          'ima/Api3.png',
                           fit: BoxFit.contain,
                           width: MediaQuery.of(context).size.width * 0.2,
                         ),
@@ -75,20 +76,20 @@ class _LombricompostaState extends State<Lombricomposta> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 35),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 35),
                   child: Text(
-                    'AGRICULTURA DE CONSERVACIÓN',
+                    'LOMBRICOMPOSTA',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xff347571),
+                      color: Color(0xff433831),
 
                     ),
                   ),
                 ),
-                Image.asset('ima/Duracion.png'),
+                Image.asset('ima/Lombri.png'),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: ElevatedButton(
@@ -98,46 +99,50 @@ class _LombricompostaState extends State<Lombricomposta> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0xff5EC57E),
+                      backgroundColor: const Color(0xff5B4F47),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding:
-                      EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                     ),
                     child:
-                    Text('Comienza ahora', style: TextStyle(fontSize: 18)),
+                    const Text('Comienza ahora', style: TextStyle(fontSize: 18)),
                   ),
                 ),
                 Visibility(
                   visible: _mostrarInformacion,
                   child: Column(
                     children: [
-                      Icon(Icons.arrow_downward, size: 30, color: Color(0xff5EC57E)),
+                      const Icon(Icons.arrow_downward, size: 30, color: Color(0xff5B4F47)),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Image.asset('ima/Obj1.png'),
+                        child: Image.asset('ima/ObjL.png'),
                       ),
-                      Text(
+                      const Text(
                         'Objetivos de Aprendizaje',
                         style: TextStyle(
-                            color: Color(0xff5EC57E),
+                            color: Color(0xff5B4F47),
                             fontWeight: FontWeight.bold,
                             fontSize: 24),
                       ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
+                      const SizedBox(height: 10),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'a) Los elementos de agricultura de conservación\n',
+                              'a) Los elementos y actividades para generar lombricomposta\n',
                               style: TextStyle(fontSize: 18),
                             ),
                             Text(
-                              'b) Los beneficios para el suelo y el agua',
+                              'b) Los elementos y actividades para generar y aplicar fermento superamargo\n',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            Text(
+                              'c) Los beneficios de los abonos orgánicos',
                               style: TextStyle(fontSize: 18),
                             ),
                           ],
@@ -145,65 +150,101 @@ class _LombricompostaState extends State<Lombricomposta> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Image.asset('ima/Mat1.png'),
+                        child: Image.asset('ima/MaterialL.png'),
                       ),
-                      Text(
+                      const Text(
                         'Materiales',
                         style: TextStyle(
-                            color: Color(0xff5EC57E),
+                            color: Color(0xff5B4F47),
                             fontWeight: FontWeight.bold,
                             fontSize: 24),
                       ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
+                      const SizedBox(height: 10),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'a) Semillas u plántulas de abonos verdes y hortalizas',
+                              'a) Estiércol de vaca como fuente de N (65kg)',
                               style: TextStyle(fontSize: 18),
                             ),
                             Text(
-                              'b) Abono organico',
+                              'b) Desechos de cosecha o paja como fuente de C(15kg)',
                               style: TextStyle(fontSize: 18),
                             ),
                             Text(
-                              'c) pacas para arrope',
+                              'c) Lombrices (1Kg)',
                               style: TextStyle(fontSize: 18),
                             ),
                             Text(
-                              'd) Herramientas',
+                              'd) Lombricomposta madura (15kg)',
                               style: TextStyle(fontSize: 18),
                             ),
                             Text(
-                              'e) Manguera para riego',
+                              'e) Palas y bieldos',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            Text(
+                              'f) Contenedor de 200L con trampa de agua',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            Text(
+                              'g) Ceniza (4kg)',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            Text(
+                              'h) Leche o suero (2L)',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            Text(
+                              'i) Melaza (2L)',
                               style: TextStyle(fontSize: 18),
                             ),
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Image.asset('ima/Idea1.png'),
-                      ),
-                      Text(
-                        '1. Introduccion a la medida (10 min)',
-                        style: TextStyle(
-                            color: Color(0xff347571),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                      SizedBox(height: 10),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.grey.shade700, // Color de la línea
+                              width: 2.0, // Grosor de la línea
+                            ),
+                          ),
+                        ),
+                        padding: const EdgeInsets.only(bottom: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Image.asset('ima/IntroL.png'),
+                            ),
+                            const SizedBox(width: 2),
+                            const Flexible(
+                              child: Text(
+                                '1. Introducción a la medida (10 min)',
+                                style: TextStyle(
+                                    color: Color(0xff5B4F47),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 100.0),
@@ -211,14 +252,14 @@ class _LombricompostaState extends State<Lombricomposta> {
                                 'Ronda participativa de intercambio de conocimiento\n',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color(0xff347571),
+                                    color: Color(0xff5B4F47),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 24),
                               ),
                             ),
                             SizedBox(height: 10),
                             Text(
-                              '¿Qué sabe el grupo acerca de agricultura de conservación y sus beneficios?',
+                              '¿Qué sabe el grupo de la lombricomposta y sus beneficios?',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 18),
                             ),
@@ -229,13 +270,13 @@ class _LombricompostaState extends State<Lombricomposta> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
-                          color: Color(0xffECF8E5),
+                          color: const Color(0xffDDC1A7),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 50.0),
@@ -243,22 +284,21 @@ class _LombricompostaState extends State<Lombricomposta> {
                                 'Mensajes clave a transmitir\n',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color(0xff347571),
+                                    color: Color(0xff5B4F47),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 24),
                               ),
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'La agricultura de conservación\n',
+                              'El humus de lombricomposta ayuda a:\n',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 18),
                             ),
                             Text(
-                              '* Consiste en cubrir el suelo, no voltearlo y rotar cultivos\n'
-                                  '* Evita pérdida de suelo y nutrientes\n'
-                                  '* Mantiene la humedad del suelo\n'
-                                  '* Es de bajo costo y aumenta la productividad con menos trabajo',
+                              '* Mejorar los suelos devolviendo sus propiedades de absorción y retención de humedad.\n'
+                                  '* Aumentar la productividad al fertilizar suelos y reducir costos al requerir menos insumos químicos.\n'
+                                  '* Diversificar ingresos si la producción es para la venta. \n',
                               style: TextStyle(fontSize: 18),
                             ),
                             Padding(
@@ -268,8 +308,8 @@ class _LombricompostaState extends State<Lombricomposta> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
@@ -277,35 +317,35 @@ class _LombricompostaState extends State<Lombricomposta> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 50.0),
-                              child: Image.asset('ima/Intro1.png'),
+                              padding: const EdgeInsets.only(top: 50.0),
+                              child: Image.asset('ima/Lombricomposta1.png'),
                             ),
-                            Text(
-                              '\nEl suelo se cubre con arrope para que haya mas materia orgánica y se mantenga la humedad del suelo.',
+                            const Text(
+                              '\nLas camas de lombricomposta deben protegerse con un techo y tener forma de colectar los lixiviados. El tamaño de las camas se calcula conforme a la  cantidad de desechos orgánicos que se producen a la semana.',
                               textAlign: TextAlign.center,
                               style:
                               TextStyle(fontSize: 18),
                             ),
-                            SizedBox(height: 10),
-                            Padding(
+                            const SizedBox(height: 10),
+                            const Padding(
                               padding: EdgeInsets.only(bottom: 50.0),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
-                          color: Color(0xff366A3F),
+                          color: const Color(0xffBD9479),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 5.0),
+                              padding: const EdgeInsets.only(top: 5.0),
                               child: Container(
-                                padding: EdgeInsets.all(10.0),
-                                child: Center(
+                                padding: const EdgeInsets.all(10.0),
+                                child: const Center(
                                   child: Text(
                                     '2. Capacitación',
                                     style: TextStyle(
@@ -317,28 +357,28 @@ class _LombricompostaState extends State<Lombricomposta> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 0.5),
-                            Padding(
+                            const SizedBox(height: 0.5),
+                            const Padding(
                               padding: EdgeInsets.only(bottom: 10.0),
                             ),
                           ],
                         ),
                         width: MediaQuery.of(context).size.width,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 35,
                             height: 35,
-                            child: Image.asset('ima/Señor.png'),
+                            child: Image.asset('ima/CapLombri.png'),
                           ),
-                          SizedBox(width: 2),
-                          Flexible(
+                          const SizedBox(width: 2),
+                          const Flexible(
                             child: Text(
-                              'a) Preparación del terreno y siembra (20 min)',
+                              'a) Siembra de lombrices (20 min)',
                               style: TextStyle(
-                                  color: Color(0xff347571),
+                                  color: Color(0xff5B4F47),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),
                               textAlign:
@@ -348,15 +388,15 @@ class _LombricompostaState extends State<Lombricomposta> {
                         ],
                         mainAxisAlignment: MainAxisAlignment.center,
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 100.0),
@@ -364,14 +404,14 @@ class _LombricompostaState extends State<Lombricomposta> {
                                 'Actividad práctica\n',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color(0xff347571),
+                                    color: Color(0xff5B4F47),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 24),
                               ),
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'Prepara el suelo y siembra con ayuda de los participantes mientras explicas los pasos de agricultura de conservación.',
+                              'Con ayuda de los participantes, empieza una mezcla para producir lombricomposta',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 18),
                             ),
@@ -382,24 +422,22 @@ class _LombricompostaState extends State<Lombricomposta> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
-                          color: Color(0xffECF8E5),
+                          color: const Color(0xffDDC1A7),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 50.0),
                             ),
                             SizedBox(height: 10),
                             Text(
-                              '* El terreno no se voltea; de ser necesario se puede descompostar los primeros centímetros haciendo surcos con ayuda de picos o arado de cincel.\n'
-                                  '* El abono orgánico se aplica sobre el terreno.\n'
-                                  '* Cubrir el 100% de la superficie del suelo con 5 a 10 cm de paja como arrope. También se pueden usar residuos de cosecha o abonos cerdes.\n'
-                                  '* Aplicar la siembra directa de semillas o plántulas en hileras. Se pueden usar herramientas para siembra directa.\n'
-                                  '* Regar las semillas o plántulas y el área de arrope cercana',
+                              '* Los ingredientes para empezar la lombricomposta son fuentes de nitrógeno (excremento o pulpa de café), fuentes de carbono (residuos de cosecha, paja u hojas de árboles) y lombricomposta ya madura. Los ingredientes se utilizan en partes iguales (15 kg en este caso)\n\n'
+                                  '* Con ayuda de los participantes, coloca los tres ingredientes en la base de la lombricomposta y mézclalos con palas.\n\n'
+                                  '* Por cada 50 kg de mezcla, aproximadamente agrega 1 kg de lombrices. La mezcla se humedece a prueba de puño.\n',
                               style: TextStyle(fontSize: 18),
                             ),
                             Padding(
@@ -409,33 +447,6 @@ class _LombricompostaState extends State<Lombricomposta> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 50.0),
-                              child: Image.asset('ima/Capacitacion.png'),
-                            ),
-                            Text(
-                              '\nEl suelo no se voltea. Para descompostarlo se puede usar con arado de cincel.',
-                              textAlign: TextAlign.center,
-                              style:
-                              TextStyle(fontSize: 18),
-                            ),
-                            SizedBox(height: 10),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 50.0),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Container(
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
@@ -444,46 +455,56 @@ class _LombricompostaState extends State<Lombricomposta> {
                             ),
                           ),
                         ),
-                        padding: EdgeInsets.only(
-                            bottom:
-                            15), // Espacio vertical entre el texto y la línea
-                        child: Text(
-                          'b) Los abonos verdes y la rotación de cultivos (20 min)',
-                          style: TextStyle(
-                            color: Color(0xff347571),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                          textAlign: TextAlign.center,
+                        padding: const EdgeInsets.only(bottom: 15), // Espacio vertical entre el texto y la línea
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 35,
+                              height: 35,
+                              child: Image.asset('ima/TrabajadorL.png'), // Asegúrate de que la ruta de la imagen sea correcta
+                            ),
+                            const SizedBox(width: 2),
+                            const Flexible(
+                              child: Text(
+                                '\nb) Otros abonos: Supermagro (20 min)',
+                                style: TextStyle(
+                                    color: Color(0xff5B4F47),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                                textAlign: TextAlign.center, // Alinea el texto al centro
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 20.0),
                               child: Text(
-                                'Actividad didáctica\n',
+                                'Actividad práctica\n',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color(0xff347571),
+                                    color: Color(0xff5B4F47),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 24),
                               ),
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'Explica la rotación de cultivos mientras muestras una semilla o planta de abono verde.\n\n\n'
-                                  '* La rotación de cultivos sirve para romper el ciclo de plagas y restaurar la fertilidad del suelo.\n\n'
-                                  '* Los abonos verdes son plantas de ciclo corto (2 a 4 meses) que se siembran entre campa{as, se cortan y se dejan en el suelo como arrope.\n\n'
-                                  '* Aumentan la fertilidad de terreno y lo protegen de la erosión.\n\n'
-                                  '* También se pueden usar estos cultivos para la rotación, que no pidan los mismos nutrientes al suelo.',
+                              'Con ayuda de los participantes, prepara una mezcla de supermagro en un contenedor de 200L\n\n\n'
+                                  '* Disuelve 50kg de excretas de vaca y 4kg de ceniza o harina de roca en 100L de agua en el contenedor de 200L\n\n'
+                                  '* Agrega 2L de suero o leche y 2L de melaza o  jugo de caña con agua y revuelve la mezcla.\n\n'
+                                  '* Cierra herméticamente en contenedor e instala la trampa de gases. En pocos minutos se verán burbujas en la botella.\n\n'
+                                  '* Explica que en 20 a 30 días la fermentación estará lista, en lugares fríos puede tardar entre 60 y 90',
                               style: TextStyle(fontSize: 18),
                             ),
                             Padding(
@@ -492,37 +513,36 @@ class _LombricompostaState extends State<Lombricomposta> {
                           ],
                         ),
                       ),
-                      Row(
+                      const Row(
                         children: [
-                          Container(
-                            width: 170, // Ancho deseado
-                            height: 170, // Alto deseado
-                            child: Image.asset('ima/Siembra.png'), // Reemplaza con la ruta de tu imagen
-                          ),
                           SizedBox(width: 10), // Espacio entre la imagen y el texto
                           Expanded(
                             child: Text(
-                              'Hay herramientas específicas para la siembra directa, como esta hoyadora en la que la semilla se pone en un lado y el abono en el otro.',
+                              'El abono tendrá olor a fermentación y será de color ámbar translucido; si es de color azul violeta y huele a podrido hubo alguna fuga en el sistema hermético. Para aplicar, se diluyen 5 a 10L de fermento en 100L de agua. El biofertilizante debe estar muy bien filtrado antes de mezclar.',
                               style: TextStyle(fontSize: 18),
                             ),
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Al cubrir el suelo y no voltearlo se va formando una capa nueva de suelo fértil',
-                              style: TextStyle(fontSize: 18),
+                      Container(
+                        color: const Color(0xffDDC1A7), // Aquí estableces el color de fondo deseado
+                        padding: const EdgeInsets.all(8), // Opcional, para añadir un poco de espacio alrededor
+                        child: Row(
+                          children: [
+                            const Expanded(
+                              child: Text(
+                                'La producción de supermagro es un proceso anaerobio (sin aire). Se debe cerrar el contenedor herméticamente y sellar la trampa de gases con silicón.',
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 16), // Espacio entre el texto y la imagen
-                          Container(
-                            width: 170, // Ancho deseado
-                            height: 170, // Alto deseado
-                            child: Image.asset('ima/Siembra2.png'), // Reemplaza con la ruta de tu imagen
-                          ),
-                        ],
+                            const SizedBox(width: 16), // Espacio entre el texto y la imagen
+                            SizedBox(
+                              width: 170, // Ancho deseado
+                              height: 170, // Alto deseado
+                              child: Image.asset('ima/TanqL.png'), // Reemplaza con la ruta de tu imagen
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -533,27 +553,36 @@ class _LombricompostaState extends State<Lombricomposta> {
                             ),
                           ),
                         ),
-                        padding: EdgeInsets.only(
-                            bottom:
-                            15), // Espacio vertical entre el texto y la línea
-                        child: Text(
-                          'c) Explicación de la medida (10 min)',
-                          style: TextStyle(
-                            color: Color(0xff347571),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                          textAlign: TextAlign.center,
+                        padding: const EdgeInsets.only(bottom: 15), // Espacio vertical entre el texto y la línea
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 35,
+                              height: 35,
+                              child: Image.asset('ima/ExplicaL.png'),                             ),
+                            const SizedBox(width: 2),
+                            const Flexible(
+                              child: Text(
+                                '\nc) Explicación de la medida (10 min)',
+                                style: TextStyle(
+                                    color: Color(0xff5B4F47),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                                textAlign: TextAlign.center, // Alinea el texto al centro
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 20.0),
@@ -561,17 +590,17 @@ class _LombricompostaState extends State<Lombricomposta> {
                                 'Actividad didáctica\n',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color(0xff347571),
+                                    color: Color(0xff433831),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 24),
                               ),
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'Muestra en qué parte del sistema se sitúa cada uno de los puntos críticos para que funcione correctamente.\n\n\n'
-                                  'PUNTO CRÍTICO 1: La cobertura del terreno evita que las lluvias o vientos erisionen el suelo y se pierdan sus nutrientes. La materia orgánica actúa como una esponja que retiene la humedad en el suelo por más tiempo.\n\n'
-                                  'PUNTO CRÍTICO 2: Al aplicar la siembra directa, sin voltear el suelo, se evita exponer el suelo al arire. Esto hace que se mantenga la riqueza biológica y química que ayuda al desarrollo de los cultivos. Se evita la erosión, se conservan los nutrientes y se mantiene la vida del suelo.\n\n'
-                                  'PUNTO CRÍTICO 3: La rotación de cultivos rompe el ciclo de plagas y malezas. Cuando se rota con abonos verdes o leguminosas se obtiene el beneficio adicional de fijar nitógeno al suelo que después estará disponible para el cultivo. El efecto en el largo plazo de la combinación de estos tres puntos es un suelo más fértil y rico en materia orgánica.',
+                              'Muestra en qué parte del sistema se sitúa cada uno de los puntos críticos para que funcione adecuadamente\n\n\n'
+                                  'PUNTO CRÍTICO 1: La capacidad de la lombricompostera depende de la cantidad de materia orgánica generada por la finca o la unidad familiar.\n\n'
+                                  'PUNTO CRÍTICO 2: El proceso inicia con una pila de mezcla en un extremo de las dos camas de producción. Conforme se incorpora materia orgánica, la pila se va extendiendo a lo largo de la cama. De esta forma la lombricomposta que va madurando queda en el extremo inicial y la lombriz se desplaza al área con mezcla fresca. La composta madura se colecta después de unos 21 días.\n\n'
+                                  'PUNTO CRÍTICO 3: Al humedecer la mezcla se generan lixiviados (líquidos que percolan a través de la mezcla). La fosa debe tener una cámara para colectar estos lixiviados, los Cuales pueden diluirse en agua y usarse como  fertilizante orgánico foliar',
                               style: TextStyle(fontSize: 18),
                             ),
                             Padding(
@@ -582,31 +611,31 @@ class _LombricompostaState extends State<Lombricomposta> {
                       ),
                       Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 200, // Ancho deseado
                             height: 170, // Alto deseado
-                            child: Image.asset('ima/imaC.png'),
+                            child: Image.asset('ima/ImaL.png'),
                           ),
-                          SizedBox(height: 0.1),
-                          Text(
-                            'Los residuos de cosecha son un excelente arrope. Es importante dejarlos en el suelo y nunca quemarlos.',
+                          const SizedBox(height: 0.1),
+                          const Text(
+                            'Las camas se construyen con una leve pendiente para que los lixiviados fluyan al recipiente. Los lixiviados se diluyen en relación 1:20 y se aplican de forma foliar.',
                             style: TextStyle(fontSize: 18),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Container(
-                            color: Color(0xffE4DDDD),
-                            padding: EdgeInsets.all(8.0), // Añade un poco de relleno alrededor
+                            color: const Color(0xffDDC1A7),
+                            padding: const EdgeInsets.all(8.0), // Añade un poco de relleno alrededor
                             child: Row(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 70,
                                   height: 70,
-                                  child: Image.asset('ima/Tip.png'),
+                                  child: Image.asset('ima/TipL.png'),
                                 ),
-                                SizedBox(width: 10),
-                                Expanded(
+                                const SizedBox(width: 10),
+                                const Expanded(
                                   child: Text(
-                                    'La agricultura de conservación no necesita de gastos adicionales. Al contrario, con menos trabajo y menos insumos químicos se pueden obtener mejores rendimientos. Pero necesita un cambio de mentalidad al pensar en el sistema productivo de forma integral. Los resultados de este sistema se empiezan a notar después de unas cuantas campañas.',
+                                    'lombricomposta terminada debe guardarse en un lugar techado para su posterior venta o  aplicación. Se recomienda aplicar la lombricomposta antes de la siembra y durante el período de cultivo. Producir lombircomposta es  mucho más barato que comprarla.Una vez terminado el proceso de fermentación y abierto el contenedor, hay que utilizar el supermagro en pocos días para evitar que se descomponga. Se diluye al 10% y se aplica al suelo durante el periodo de crecimiento del cultivo.',
                                     style: TextStyle(fontSize: 12),
                                   ),
                                 ),
@@ -625,7 +654,7 @@ class _LombricompostaState extends State<Lombricomposta> {
         ),
         bottomNavigationBar: Container(  // Usamos `bottomNavigationBar` para la barra inferior
           height: screenHeight * 0.05,
-          color: Color(0xff072931),
+          color: const Color(0xff072931),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -634,20 +663,16 @@ class _LombricompostaState extends State<Lombricomposta> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => PagPrincipal()),
+                    MaterialPageRoute(builder: (_) => const PagPrincipal()),
                   );
                 },
               ),
               IconButton(
-                icon: Icon(Icons.search, color: Color(0xffd9d9d9)),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.person, color: Color(0xffd9d9d9)),
+                icon: const Icon(Icons.person, color: Color(0xffd9d9d9)),
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => Perfil()),
+                    MaterialPageRoute(builder: (_) => const Perfil()),
                   );
                 },
               ),
