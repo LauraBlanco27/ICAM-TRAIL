@@ -152,7 +152,7 @@ class SenderosScreen extends StatelessWidget {
                               ),
                               Expanded(
                                 child: _circleContainer(
-                                  backgroundImage: 'ima/recorrido2.jpg',
+                                  backgroundImage: 'ima/recorrido2.jpeg',
                                   circleImage: 'ima/camaraa.png',
                                   onTapAction: () {
                                     Navigator.push(

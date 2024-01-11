@@ -27,17 +27,17 @@ apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:30.3.2')// Utiliza la última versión
+    implementation platform('com.google.firebase:firebase-bom:32.3.1')// Utiliza la última versión
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.github.yalantis:ucrop:2.2.6'
+    implementation 'com.google.firebase:firebase-firestore:24.0.1'
     implementation 'com.google.ar:core:1.40.0'
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    implementation 'com.google.firebase:firebase-auth'
 
-    // Prueba de dependencias
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -68,6 +68,10 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+    }
+
+    packagingOptions {
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
     }
 }
 

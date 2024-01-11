@@ -1,21 +1,9 @@
-import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
-import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
-import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
-import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
-import 'package:ar_flutter_plugin/models/ar_anchor.dart';
-import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
-import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
-import 'package:ar_flutter_plugin/datatypes/node_types.dart';
-import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
-import 'package:ar_flutter_plugin/models/ar_node.dart';
-import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
-import 'package:flutter/services.dart';
-import 'package:proyecto1/View/progress_panel.dart';
-import 'package:vector_math/vector_math_64.dart' hide Colors;
-import 'dart:math';
-import 'InfoSendero1.dart';
+import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:vector_math/vector_math_64.dart' as vector;
+import 'package:http/http.dart' as http;
 
 class ARSendero1 extends StatefulWidget {
   @override
@@ -23,145 +11,116 @@ class ARSendero1 extends StatefulWidget {
 }
 
 class _ARSendero1State extends State<ARSendero1> {
-  ARSessionManager? arSessionManager;
-  ARObjectManager? arObjectManager;
-  ARAnchorManager? arAnchorManager;
-  bool? isARCoreCompatible;
-  List<ARNode> nodes = [];
-  List<ARAnchor> anchors = [];
-
-  int modelosVistos = 0;
-  double distanciaRecorrida = 0.0;
-
+  late ArCoreController arCoreController;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController? qrViewController;
+  String? qrData;
+  bool showARView = true;
+  bool isLoading = false;
 
   @override
-  void initState() {
-    super.initState();
-    checkARCoreCompatibility();
-  }
-
-  void checkARCoreCompatibility() async {
-    try {
-      bool? isSupported = await ArCoreController.checkArCoreAvailability();
-      setState(() {
-        isARCoreCompatible = isSupported;
-      });
-    } catch (e) {
-      print("Error checking ARCore availability: $e");
-      setState(() {
-        isARCoreCompatible = false; // Considerar no compatible si hay un error
-      });
-    }
+  void dispose() {
+    arCoreController.dispose();
+    qrViewController?.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sendero Ecológico AR"),
+        title: Text('AR Sendero'),
         actions: [
+          if (isLoading)
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: CircularProgressIndicator(color: Colors.white),
+            ),
           IconButton(
-            icon: Icon(Icons.timeline),
-            onPressed: _mostrarProgreso,
+            icon: Icon(showARView ? Icons.qr_code_scanner : Icons.camera),
+            onPressed: () => toggleView(),
           ),
         ],
       ),
-      body: ARView(
-        onARViewCreated: onARViewCreated,
-        planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
-      ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+      floatingActionButton: showARView ? FloatingActionButton(
+        onPressed: () => clearARContent(),
+        child: Icon(Icons.close),
+      ) : null,
+      body: Stack(
         children: [
-          FloatingActionButton(
-            onPressed: onRemoveEverything,
-            child: Icon(Icons.delete_outline),
-          ),
-          SizedBox(height: 10),
-          FloatingActionButton(
-            onPressed: _finalizarExperiencia,
-            child: Icon(Icons.stop),
+          showARView ? ArCoreView(onArCoreViewCreated: _onARCoreViewCreated) : _buildQRView(),
+          Positioned(
+            bottom: 20,
+            left: 20,
+            child: Text(qrData ?? 'Escanea un código QR'),
           ),
         ],
       ),
     );
   }
 
-  void _mostrarProgreso() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return ProgressPanel(
-          modelosVistos: modelosVistos,
-          distanciaRecorrida: distanciaRecorrida,
-        );
-      },
-    );
-  }
+  Widget _buildQRView() => QRView(key: qrKey, onQRViewCreated: _onQRViewCreated);
 
-  void _finalizarExperiencia() {
-    // Navega a la pantalla InfoSendero1 y reemplaza la pantalla actual
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => Sendero1()),
-    );
-  }
-
-  void onARViewCreated(ARSessionManager arSessionManager, ARObjectManager arObjectManager, ARAnchorManager arAnchorManager, ARLocationManager arLocationManager) {
-    this.arSessionManager = arSessionManager;
-    this.arObjectManager = arObjectManager;
-    this.arAnchorManager = arAnchorManager;
-
-    // Configurar la detección de planos
-    arSessionManager.onPlaneOrPointTap = onPlaneOrPointTapped;
-  }
-
-  Future<void> onPlaneOrPointTapped(List<ARHitTestResult> hitTestResults) async {
-    for (var hitTestResult in hitTestResults) {
-      if (hitTestResult.type == ARHitTestResultType.plane) {
-        var newAnchor = ARPlaneAnchor(transformation: hitTestResult.worldTransform);
-        bool? didAddAnchor = await arAnchorManager!.addAnchor(newAnchor);
-        if (didAddAnchor!) {
-          // Añadir un modelo 3D al ancla
-          var newNode = ARNode(
-            type: NodeType.localGLTF2,  // Asegúrate de que tu modelo es compatible
-            uri: "Models/Invernadero.gltf",  // Ruta al modelo 3D en tus activos
-            scale: Vector3(0.2, 0.2, 0.2),  // Ajusta la escala según sea necesario
-            position: Vector3(0.0, 0.0, 0.0),  // Posición inicial del modelo
-          );
-          bool? didAddNodeToAnchor = await arObjectManager!.addNode(newNode, planeAnchor: newAnchor);
-          if (didAddNodeToAnchor!) {
-            print("Modelo 3D añadido exitosamente");
-          } else {
-            print("Error al añadir el modelo 3D");
-          }
-        }
+  void toggleView() {
+    setState(() {
+      showARView = !showARView;
+      if (!showARView) {
+        qrViewController?.resumeCamera();
+      } else {
+        qrViewController?.pauseCamera();
       }
+    });
+  }
+
+  void _onARCoreViewCreated(ArCoreController controller) {
+    arCoreController = controller;
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    qrViewController = controller;
+    controller.scannedDataStream.listen((scanData) => handleQRData(scanData.code));
+  }
+
+  void handleQRData(String? qrCode) {
+    if (qrCode == null || qrCode.isEmpty) return;
+    setState(() {
+      qrData = qrCode;
+      isLoading = true; // Iniciar el indicador de carga
+    });
+    _addImageToAR(qrCode);
+  }
+
+  void _addImageToAR(String imageUrl) {
+    downloadImage(imageUrl).then((imageBytes) {
+      final texture = ArCoreMaterial(textureBytes: imageBytes);
+      final imageNode = ArCoreNode(
+        shape: ArCoreCube(
+          materials: [texture],
+          size: vector.Vector3(1, 1, 0.1),
+        ),
+        position: vector.Vector3(0, 0, -1),
+      );
+      arCoreController.addArCoreNode(imageNode);
+      setState(() => isLoading = false); // Finalizar el indicador de carga
+    });
+  }
+
+  Future<Uint8List> downloadImage(String url) async {
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        return response.bodyBytes;
+      } else {
+        throw Exception('Failed to load image');
+      }
+    } catch (e) {
+      print(e);
+      return Uint8List(0);
     }
   }
 
-  Future<void> onNodeTapped(List<String> nodeIds) async {
-    // Lógica para manejar el toque en los nodos
-  }
+  void clearARContent() {
+    arCoreController.dispose();
 
-  void onRemoveEverything() {
-    anchors.forEach((anchor) {
-      arAnchorManager!.removeAnchor(anchor);
-    });
-    anchors.clear();
-    nodes.clear();
-  }
-
-  Widget buildAlternativeExperience() {
-    return Scaffold(
-      appBar: AppBar(title: Text("Experiencia Alternativa")),
-      body: Center(child: Text("ARCore no es compatible con este dispositivo")),
-    );
-  }
-
-  @override
-  void dispose() {
-    arSessionManager?.dispose();
-    super.dispose();
   }
 }
-

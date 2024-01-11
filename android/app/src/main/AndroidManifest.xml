@@ -3,6 +3,7 @@
    <application
         android:label="proyecto1"
         android:icon="@mipmap/ic_launcher">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -28,6 +29,11 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
+
+            <meta-data
+                android:name="com.google.android.geo.GOOGLE_API_KEY"
+                android:value="AIzaSyBwQXT4w9yFUbFGithX436iWEGPcgk17yU"/>
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

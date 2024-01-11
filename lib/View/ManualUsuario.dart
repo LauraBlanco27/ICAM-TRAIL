@@ -5,11 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'PDFScreen.dart';
-
-
-
 
 class ManualUsuario extends StatefulWidget {
   @override
@@ -18,48 +14,21 @@ class ManualUsuario extends StatefulWidget {
 
 class _ManualUsuarioState extends State<ManualUsuario> {
   String pathPDF = "";
-  String landscapePathPdf = "";
-  String remotePDFpath = "";
-  String corruptedPathPDF = "";
 
   @override
   void initState() {
     super.initState();
 
     fromAsset('assets/ManualUsuario.pdf', 'ManualUsuario.pdf').then((f) {
-      setState(() {
-        pathPDF = f.path;
-      });
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PDFScreen(path: f.path),
+          ),
+        );
+      }
     });
-
-    createFileOfPdfUrl().then((f) {
-      setState(() {
-        remotePDFpath = f.path;
-      });
-    });
-  }
-
-  Future<File> createFileOfPdfUrl() async {
-    Completer<File> completer = Completer();
-    print("¡Iniciando descarga de internet!");
-    try {
-      const url = "http://www.pdf995.com/samples/pdf.pdf";
-      final filename = url.substring(url.lastIndexOf("/") + 1);
-      var request = await HttpClient().getUrl(Uri.parse(url));
-      var response = await request.close();
-      var bytes = await consolidateHttpClientResponseBytes(response);
-      var dir = await getApplicationDocumentsDirectory();
-      print("Archivo descargado");
-      print("${dir.path}/$filename");
-      File file = File("${dir.path}/$filename");
-
-      await file.writeAsBytes(bytes, flush: true);
-      completer.complete(file);
-    } catch (e) {
-      throw Exception('Error convirtiendo el archivo!');
-    }
-
-    return completer.future;
   }
 
   Future<File> fromAsset(String asset, String filename) async {
@@ -81,49 +50,12 @@ class _ManualUsuarioState extends State<ManualUsuario> {
 
   @override
   Widget build(BuildContext context) {
+    // Dado que initState manejará la navegación a PDFScreen,
+    // aquí puedes mostrar un indicador de carga hasta que initState navegue.
     return MaterialApp(
-      title: 'Manual de usuario',
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: const Text('Manual de Usuario')),
-        body: Center(child: Builder(
-          builder: (BuildContext context) {
-            return Column(
-              children: <Widget>[
-                TextButton(
-                  child: const Text("Abrir manual 📚"),
-                  onPressed: () {
-                    if (pathPDF.isNotEmpty) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PDFScreen(path: pathPDF),
-                        ),
-                      );
-                    }
-                  },
-                ),
-
-                TextButton(
-                  child: const Text("Manual Online 📱"),
-                  onPressed: () {
-                    if (remotePDFpath.isNotEmpty) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PDFScreen(path: remotePDFpath),
-                        ),
-                      );
-                    }
-                  },
-                ),
-
-              ],
-            );
-          },
-        )),
+        body: Center(child: CircularProgressIndicator()),
       ),
     );
   }
 }
-

@@ -7,12 +7,119 @@ class TerrazasAgricolas extends StatefulWidget {
   const TerrazasAgricolas({super.key});
 
   @override
-  _TerrazasAgricolasState createState() =>
-      _TerrazasAgricolasState();
+  _TerrazasAgricolasState createState() => _TerrazasAgricolasState();
 }
 
 class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
   bool _mostrarInformacion = false;
+
+  // Método para construir un elemento de lista con icono y texto.
+  Widget _buildItem(IconData icon, String text, {required color}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 20, color: Colors.green[900]),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Método para construir elementos de mensajes.
+  Widget _buildMessageItem(IconData icon, String title, String subtitle) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.green),
+      title: Text(
+        title,
+        style: const TextStyle(fontSize: 18),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: const TextStyle(fontSize: 18),
+      ),
+    );
+  }
+
+  // Método para construir un punto de bala con texto.
+  Widget _buildBulletPoint(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('• ', style: TextStyle(fontSize: 18, color: Colors.black)),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 18, color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Método para construir un icono con texto.
+  Widget _buildBulletPoints(String text, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 20, color: Colors.green),
+          const SizedBox(width: 5),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Método para construir un punto interactivo con título, descripción e icono.
+  Widget _buildInteractivePoint(
+      String title, String description, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: Colors.green, size: 30),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  description,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +148,28 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    Flexible(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset(
+                          'ima/Udec.png',
+                          fit: BoxFit.contain,
+                          width: MediaQuery.of(context).size.width * 0.1,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset(
+                          'ima/LogoICAMTrail.png',
+                          fit: BoxFit.contain,
+                          width: MediaQuery.of(context).size.width * 0.2,
+                        ),
+                      ),
+                    ),
                     Flexible(
                       flex: 1,
                       child: Padding(
@@ -85,7 +214,6 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Color(0xff7B3911),
-
                     ),
                   ),
                 ),
@@ -103,11 +231,10 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 60, vertical: 15),
                     ),
-                    child:
-                    const Text(
+                    child: const Text(
                       'Comienza ahora',
                       style: TextStyle(
                         fontSize: 18,
@@ -120,7 +247,8 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                   visible: _mostrarInformacion,
                   child: Column(
                     children: [
-                      const Icon(Icons.arrow_downward, size: 30, color: Color(0xffDDB39A)),
+                      const Icon(Icons.arrow_downward,
+                          size: 30, color: Color(0xffDDB39A)),
                       Container(
                         width: MediaQuery.of(context).size.width,
                         color: const Color(0xffFFEDBD),
@@ -129,7 +257,7 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                             Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Image.asset(
-                                'ima/Terraza5.png',
+                                'assets/Gif/ObjGif6.gif',
                                 width: 120,
                                 height: 120,
                               ),
@@ -143,21 +271,63 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                             ),
                             const SizedBox(height: 10),
                             const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 10.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'a)  Los elementos del huerto familiar \n',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Icon(Icons.eco_outlined,
+                                          size: 20, color: Colors.green),
+                                      SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          'Los beneficios de la medida',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'b) La forma de hacer camas de doble excavación \n',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
+                                  SizedBox(height: 8),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Icon(Icons.eco_outlined,
+                                          size: 20, color: Colors.green),
+                                      SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          'La importancia del muro de piedra',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'c) Los beneficios para la seguridad alimentaria de la unidad familiar',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
+                                  SizedBox(height: 8),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Icon(Icons.eco_outlined,
+                                          size: 20, color: Colors.green),
+                                      SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          'Puntos clave para la construcción',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -178,43 +348,24 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                                   fontSize: 24),
                             ),
                             const SizedBox(height: 10),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 10.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'a) Semillas de cultivos bajos (Lechuga, zanahoria) ',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
-                                  ),
-                                  Text(
-                                    'b) Semillas de cultivos medios (maíz, quinoa, amaranto)',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
-                                  ),
-                                  Text(
-                                    'c) Plantines de cultivos altos (árboles o arbustos frutales)',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
-                                  ),
-                                  Text(
-                                    'd) Abono orgánico ',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
-                                  ),
-                                  Text(
-                                    'e) Herramientas (pala, bieldo)',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
-                                  ),
-                                  Text(
-                                    'f) Material para trazado de las camas de doble excavado (estacas, cuerda)',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
-                                  ),
-                                  Text(
-                                    'g) Manguera para riego ',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
-                                  ),
-                                  Text(
-                                    'h) Pacas para arrope',
-                                    style: TextStyle(color: Color(0xff7B3911), fontSize: 16),
-                                  ),
+                                  _buildItem(
+                                      Icons.construction,
+                                      color: Colors.brown[600],
+                                      'Piedra para el muro'),
+                                  _buildItem(
+                                      Icons.construction,
+                                      color: Colors.brown[200],
+                                      'Herramientas (azadón, pico, pala carretilla)'),
+                                  _buildItem(
+                                      Icons.construction,
+                                      color: Colors.brown,
+                                      'Instrumentos de nivelado (nivel A)'),
                                 ],
                               ),
                             ),
@@ -229,28 +380,42 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
-                                    color: Colors.grey.shade700, // Color de la línea
-                                    width: 2.0, // Grosor de la línea
+                                    color: Colors.grey.shade700,
+                                    width: 2.0,
                                   ),
                                 ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                                color: const Color(0xffF6F6E9),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              padding: const EdgeInsets.only(bottom: 15),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 20),
+                              margin: const EdgeInsets.symmetric(vertical: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: Image.asset('ima/Terraza7.png'),
+                                    width: 60,
+                                    height: 60,
+                                    child: Image.asset('ima/Introo1.png'),
                                   ),
-                                  const SizedBox(width: 2),
+                                  const SizedBox(width: 0),
                                   const Flexible(
                                     child: Text(
                                       '1. Introducción a la medida (10 min)',
                                       style: TextStyle(
-                                          color: Color(0xff7B3911),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        fontFamily: 'Arial',
+                                      ),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -259,104 +424,131 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                             ),
                             Container(
                               padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 20.0),
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.0),
+                                color: const Color(0xffF6F6E9),
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.green.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
                               ),
-                              child: const Column(
+                              child: Column(
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 100.0),
-                                    child: Text(
-                                      'Ronda participativa de intercambio de conocimiento\n',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Color(0xff7B3911),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24),
+                                  SizedBox(height: 30),
+                                  Text(
+                                    'Ronda participativa de intercambio de conocimiento',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                      fontFamily: 'Arial',
                                     ),
                                   ),
                                   SizedBox(height: 10),
-                                  Text(
-                                    '¿Qué sabe el grupo acerca las terrazas agrícolas y sus beneficios?',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 18),
+                                  Image.asset(
+                                    'assets/Gif/Pregunta4.gif',
+                                    width: 120,
+                                    height: 120,
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 100.0),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    '¿Qué sabe el grupo acerca de las terrazas agrícolas y sus beneficios?',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.black),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
                               padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 20.0),
                               decoration: BoxDecoration(
                                 color: const Color(0xffFFEDBD),
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.8),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
                               ),
-                              child: const Column(
+                              child: Column(
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 50.0),
-                                    child: Text(
-                                      'Mensajes clave a transmitir\n',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Color(0xff7B3911),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24),
+                                  const Text(
+                                    'Mensajes clave a transmitir',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Las terrazas ayudan a: \n',
+                                  const SizedBox(height: 20),
+                                  const Text(
+                                      'Las terrazas ayudan a:',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(fontSize: 18),
                                   ),
-                                  Text(
-                                    '* Reducir la erosión por lluvias intensas.\n\n'
-                                        '* Absorber y retener la humedad en el suelo.\n\n'
-                                        '* Aumentar la productividad de terrenos en pendiente.',
-
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 50.0),
-                                  ),
+                                  _buildMessageItem(Icons.compress, 'Reducir la erosión por', 'lluvias intensas.',),
+                                  _buildMessageItem(Icons.control_camera, 'Absorber y retener la', 'humedad en el suelo.'),
+                                  _buildMessageItem(Icons.trending_up, 'Aumentar la productividad', 'de terrenos en pendiente.'),
+                                  const SizedBox(height: 20),
                                 ],
                               ),
                             ),
                             Container(
                               padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 20.0),
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.0),
+                                color: const Color(0xffF6F6E9),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.green.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
                               ),
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 50.0),
-                                    child: Image.asset('ima/Terraza8.png'),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 30.0),
+                                    child: Image.asset(
+                                      'ima/Terraza8.png',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  const SizedBox(height: 10),
                                   const Text(
-                                    '\nLa tierra en el área de cultivo se acomoda por capas: abajo, gravilla y piedras para drenaje; en medio, arena o tierra más fina, y arriba, tierra fértil para cultivo.',
+                                    'La tierra en el área de cultivo se acomoda por capas: abajo, gravilla y piedras para drenaje; en medio, arena o tierra más fina, y arriba, tierra fértil para cultivo.',
                                     textAlign: TextAlign.center,
-                                    style:
-                                    TextStyle(fontSize: 18),
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black87,
+                                      fontFamily: 'Arial',
+                                    ),
                                   ),
-                                  const SizedBox(height: 10),
-                                  const Padding(
-                                    padding: EdgeInsets.only(bottom: 50.0),
-                                  ),
+                                  const SizedBox(height: 30),
                                 ],
                               ),
                             ),
                             Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                              margin:
+                              const EdgeInsets.symmetric(horizontal: 20.0),
                               decoration: BoxDecoration(
                                 color: const Color(0xffDDB39A),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -388,108 +580,176 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                               width: MediaQuery.of(context).size.width,
                             ),
                             const SizedBox(height: 10),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: Image.asset('ima/Terraza9.png'),
-                                ),
-                                const SizedBox(width: 0),
-                                const Flexible(
-                                  child: Text(
-                                    'a) Limpieza y novelado del terreno (20 min)',
-                                    style: TextStyle(
-                                        color: Color(0xff7B3911),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                    textAlign: TextAlign.center,
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.grey.shade700,
+                                    width: 2.0,
                                   ),
                                 ),
-                              ],
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              ),
+                              padding: const EdgeInsets.only(bottom: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: const Color(0xffF6F6E9),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                            Colors.green.withOpacity(0.3),
+                                            spreadRadius: 3,
+                                            blurRadius: 5,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: Colors.grey.shade700,
+                                            width: 2.0,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset(
+                                            'ima/Terraza9.png',
+                                            fit: BoxFit.contain),
+                                      ),
+                                    ),
+                                  ),
+                                  const Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        'a) Limpieza y nivelado del terreno (20 min)',
+                                        style: TextStyle(
+                                          color: Color(0xff5B4F47),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 15),
                             Container(
                               padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                              margin:
+                              const EdgeInsets.symmetric(horizontal: 20.0),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: const Color(0xffF6F6E9),
                                 borderRadius: BorderRadius.circular(8.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.green.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
                               ),
                               child: const Column(
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 100.0),
-                                    child: Text(
-                                      'Actividad práctica\n',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Color(0xff7B3911),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24),
+                                  SizedBox(height: 20),
+                                  Text(
+                                    'Actividad práctica\n',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
                                     ),
                                   ),
                                   SizedBox(height: 10),
                                   Text(
                                     'Muestra cómo debe quedar la terraza comparándola con las terrazas aledañas ya terminadas. Pide a los participantes que ayuden a limpiar y nivelar 2m lineales de terraza aproximadamente.',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 18),
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: 'Arial',
+                                    ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 100.0),
-                                  ),
+                                  SizedBox(height: 20),
                                 ],
                               ),
                             ),
+                            const SizedBox(height: 20),
                             Container(
                               padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 20.0),
                               decoration: BoxDecoration(
                                 color: const Color(0xffFFEDBD),
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.8),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
                               ),
-                              child: const Column(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 50.0),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    '* La maleza se remueve con ayuda de picos y azadones.\n\n'
-                                        '* El terreno se deja nivelado para que el agua se infiltre en lugar de escurrir.\n\n'
-                                        '* El canal de drenaje se excava a unos 50 cm de profundidad, pegado al muro del fondo de cada terraza.',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 50.0),
-                                  ),
+                                  _buildBulletPoint(
+                                      'La maleza se remueve con ayuda de picos y azadones.'),
+                                  _buildBulletPoint(
+                                      'El terreno se deja nivelado para que el agua se infiltre en lugar de escurrir.'),
+                                  _buildBulletPoint(
+                                    'El canal de drenaje se excava a unos 50 cm de profundidad, pegado al muro del fondo de cada terraza.'),
+                                  const SizedBox(height: 20),
                                 ],
                               ),
                             ),
                             Container(
                               padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 20.0),
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.0),
+                                color: const Color(0xffF6F6E9),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.green.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
                               ),
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 50.0),
-                                    child: Image.asset('ima/Terraza10.png'),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 30.0),
+                                    child: Image.asset(
+                                      'ima/Terraza10.png',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                   const Text(
-                                    '\nPegado al muro se construye un canal de drenaje o desagüe. Con una pendiente de 2%. Los muros se construyen de forma perpendicular a la pendiente del terreno. Se pueden piedras salidas que sirven de escaleras.',
+                                    'Pegado al muro se construye un canal de drenaje o desagüe. Con una pendiente de 2%. Los muros se construyen de forma perpendicular a la pendiente del terreno. Se pueden piedras salidas que sirven de escaleras.',
                                     textAlign: TextAlign.center,
-                                    style:
-                                    TextStyle(fontSize: 18),
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black87,
+                                      fontFamily: 'Arial',
+                                    ),
                                   ),
-                                  const SizedBox(height: 5),
-                                  const Padding(
-                                    padding: EdgeInsets.only(bottom: 50.0),
-                                  ),
+                                  const SizedBox(height: 30),
                                 ],
                               ),
                             ),
@@ -498,173 +758,343 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
-                                    color: Colors.grey.shade700, // Color de la línea
-                                    width: 2.0, // Grosor de la línea
+                                    color: Colors.grey.shade700,
+                                    width: 2.0,
                                   ),
                                 ),
                               ),
                               padding: const EdgeInsets.only(bottom: 15),
-                              child: const Row(
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(width: 2),
-                                  Flexible(
-                                    child: Text(
-                                      'b) Construcción del muro de piedra (20 min)',
-                                      style: TextStyle(
-                                          color: Color(0xff7B3911),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                      textAlign: TextAlign.center,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: const Color(0xffF6F6E9),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                            Colors.green.withOpacity(0.3),
+                                            spreadRadius: 3,
+                                            blurRadius: 5,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: Colors.grey.shade700,
+                                            width: 2.0,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset(
+                                            'ima/Terraza9.png',
+                                            fit: BoxFit.contain),
+                                      ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: const Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 20.0),
-                                    child: Text(
-                                      'Actividad práctica\n',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Color(0xff7B3911),
+                                  const SizedBox(width: 0),
+                                  const Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        'b) Construcción del muro de piedra (20 min)',
+                                        style: TextStyle(
+                                          color: Color(0xff5B4F47),
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 24),
+                                          fontSize: 18,
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Muestra cómo son los muros de terrazas aledañas ya terminadas. Pide a los participantes que construyan el muro en los 2m previamente acondicionados.\n\n\n'
-                                        '* El muro se construye sobre el canal de drenaje o cimientos apilando piedras. A cada hilada de piedra se agrega tierra húmeda y se compacta. El muro tiene unos 30 a 50 cm de grosor.\n\n'
-                                        '* En caso de que el muro mida más de 2 m de alto se refuerza con cemento.\n\n'
-                                        '* Las piedras grandes se acomodan primero, buscando superficies planas y poniendo cuidado en que los espacios libres se rellenen con piedras pequeñas y tierra.',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 20.0),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                SizedBox(
-                                  width: 200, // Ancho deseado
-                                  height: 170, // Alto deseado
-                                  child: Image.asset('ima/Terraza11.png'),
-                                ),
-                                const SizedBox(height: 10),
-                                const Text(
-                                  '\nLos cimientos de las terrazas se construyen siguiendo las curvas a nivel. Para trazarlas correctamente se requiere usar un aparato A u otra herramienta de nivel.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                const SizedBox(height: 50),
-                              ],
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Colors.grey.shade700, // Color de la línea
-                                    width: 2.0, // Grosor de la línea
-                                  ),
-                                ),
-                              ),
-                              padding: const EdgeInsets.only(bottom: 15),
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(width: 2),
-                                  Flexible(
-                                    child: Text(
-                                      'c) Explicación de la medida (10 min)',
-                                      style: TextStyle(
-                                          color: Color(0xff7B3911),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: const Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 20.0),
-                                    child: Text(
-                                      'Actividad didáctica\n',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Color(0xff291B25),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24),
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Muestra en qué parte de la terraza se sitúa cada uno de los puntos críticos para que funcione adecuadamente.\n\n\n'
-                                        'PUNTO CRÍTICO 1: Las terrazas se construyen siguiendo la curva a nivel del lugar. El trazado se puede realizar con un  aparato A o cualquier otro tipo de herramienta de nivel. El drenaje en la parte posterior de la terraza tiene un desnivel del 2% para evitar la anegación del suelo que sostiene el muro y que éste se derrumbe.\n\n'
-                                        'PUNTO CRÍTICO 2: Los muros que sostienen las terrazas superiores deben ser estables, construidos de forma perpendicular a la pendiente para evitar derrumbes. Las piedras se acomodan de mayor a menor tamaño y se cimientan con tierra húmeda compactada.',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 20.0),
                                   ),
                                 ],
                               ),
                             ),
                             const SizedBox(height: 20),
+                            Container(
+                              padding: const EdgeInsets.all(20.0),
+                              margin:
+                              const EdgeInsets.symmetric(horizontal: 20.0),
+                              decoration: BoxDecoration(
+                                color: const Color(0xffF6F6E9),
+                                borderRadius: BorderRadius.circular(8.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.green.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      'Actividad práctica',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 25),
+                                  const Text(
+                                    'Muestra cómo son los muros de terrazas aledañas ya terminadas. Pide a los participantes que construyan el muro en los 2m previamente acondicionados.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Center(
+                                    child: Image.asset(
+                                      'assets/Gif/Terrazaa2.gif',
+                                      width: 120,
+                                      height: 120,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  _buildBulletPoints(
+                                      'El muro se construye sobre el canal de drenaje o cimientos apilando piedras. A cada hilada de piedra se agrega tierra húmeda y se compacta. El muro tiene unos 30 a 50 cm de grosor.',
+                                      Icons.layers),
+                                  _buildBulletPoints(
+                                      'En caso de que el muro mida más de 2 m de alto se refuerza con cemento.',
+                                      Icons.straighten),
+                                  _buildBulletPoints(
+                                      'Las piedras grandes se acomodan primero, buscando superficies planas y poniendo cuidado en que los espacios libres se rellenen con piedras pequeñas y tierra.',
+                                      Icons.landscape),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(20.0),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 20.0),
+                              decoration: BoxDecoration(
+                                color: const Color(0xffFFEDBD),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.8),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 30.0),
+                                    child: Image.asset(
+                                      'ima/Terraza11.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Los cimientos de las terrazas se construyen siguiendo las curvas a nivel. Para trazarlas correctamente se requiere usar un aparato A u otra herramienta de nivel.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black87,
+                                      fontFamily: 'Arial',
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.grey.shade700,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                              padding: const EdgeInsets.only(bottom: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: const Color(0xffF6F6E9),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                            Colors.green.withOpacity(0.3),
+                                            spreadRadius: 3,
+                                            blurRadius: 5,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: Colors.grey.shade700,
+                                            width: 2.0,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset(
+                                            'ima/Terraza9.png',
+                                            fit: BoxFit.contain),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 0),
+                                  const Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        'c) Explicación de la medida (10 min)',
+                                        style: TextStyle(
+                                          color: Color(0xff5B4F47),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              padding: const EdgeInsets.all(20.0),
+                              margin:
+                              const EdgeInsets.symmetric(horizontal: 20.0),
+                              decoration: BoxDecoration(
+                                color: const Color(0xffF6F6E9),
+                                borderRadius: BorderRadius.circular(12.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.green.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    'Actividad didáctica',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xff433831),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                      fontFamily: 'Arial',
+                                    ),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Text(
+                                    'Muestra en qué parte de la terraza se sitúa cada uno de los puntos críticos para que funcione adecuadamente.',
+                                    style: TextStyle(
+                                      color: Color(0xff5B4F47),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                        fontFamily: 'Arial'
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 15),
+                                  _buildInteractivePoint(
+                                    'PUNTO CRÍTICO 1',
+                                    'Las terrazas se construyen siguiendo la curva a nivel del lugar. El trazado se puede realizar con un  aparato A o cualquier otro tipo de herramienta de nivel. El drenaje en la parte posterior de la terraza tiene un desnivel del 2% para evitar la anegación del suelo que sostiene el muro y que éste se derrumbe.',
+                                    Icons.filter_1,
+                                  ),
+                                  _buildInteractivePoint(
+                                    'PUNTO CRÍTICO 2',
+                                    'Los muros que sostienen las terrazas superiores deben ser estables, construidos de forma perpendicular a la pendiente para evitar derrumbes. Las piedras se acomodan de mayor a menor tamaño y se cimientan con tierra húmeda compactada.',
+                                    Icons.filter_2,
+                                  ),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 5),
                             Column(
                               children: [
-                                SizedBox(
-                                  width: 250, // Ancho deseado
-                                  height: 120, // Alto deseado
-                                  child: Image.asset('ima/Terraza12.png'),
-                                ),
-                                const SizedBox(height: 0.1),
-                                const Text(
-                                  '\nTerrazas agrícolas en Perú.\n',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                const SizedBox(height: 10),
-                                Container(
+                                Card(
                                   color: const Color(0xffF6F6E9),
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
+                                  elevation: 5,
+                                  margin: const EdgeInsets.all(10),
+                                  child: Column(
                                     children: [
+                                      const SizedBox(height: 10),
                                       SizedBox(
-                                        width: 70,
-                                        height: 70,
-                                        child: Image.asset('ima/Terraza13.png'),
+                                        width: 200,
+                                        height: 170,
+                                        child: Image.asset(
+                                            'ima/Terraza12.png',
+                                            fit: BoxFit.cover),
                                       ),
-                                      const SizedBox(width: 10),
-                                      const Expanded(
+                                      const Padding(
+                                        padding: EdgeInsets.all(10),
                                         child: Text(
-                                          'Las terrazas requieren gran cantidad de mano de obra; se recomienda construirlas de forma comunitaria.Una actividad alternativa puede ser la de  razar curvas a nivel con ayuda del aparato A.',
-                                          style: TextStyle(fontSize: 12),
+                                          'Terrazas agrícolas en Perú.',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
+                                Container(
+                                  color: const Color(0xffF6F6E9),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 70,
+                                            height: 70,
+                                            child: Image.asset(
+                                                'ima/Terraza13.png'),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          const Expanded(
+                                            child: Padding(
+                                              padding:
+                                              EdgeInsets.only(right: 10),
+                                              child: Text(
+                                                  'Las terrazas requieren gran cantidad de mano de obra; se recomienda construirlas de forma comunitaria.Una actividad alternativa puede ser la de  razar curvas a nivel con ayuda del aparato A.',
+                                                style: TextStyle(fontSize: 12),
+                                                textAlign: TextAlign.justify,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                           ],
@@ -677,7 +1107,8 @@ class _TerrazasAgricolasState extends State<TerrazasAgricolas> {
             ),
           ),
         ),
-        bottomNavigationBar: Container(  // Usamos `bottomNavigationBar` para la barra inferior
+        bottomNavigationBar: Container(
+          // Usamos `bottomNavigationBar` para la barra inferior
           height: screenHeight * 0.05,
           color: const Color(0xff072931),
           child: Row(

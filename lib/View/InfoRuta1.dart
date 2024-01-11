@@ -4,7 +4,7 @@ import 'InfoSendero1.dart';
 class InfoPoint {
   final int id;
   final String title;
-  final Offset position; // Usar Offset para definir la posición en el mapa
+  final Offset position;
   final String description;
   final String imagePath;
 
@@ -13,71 +13,106 @@ class InfoPoint {
     required this.position,
     required this.title,
     required this.description,
-    required this.imagePath, // Default value for imagePath
+    required this.imagePath,
   });
 }
 
-// Lista de puntos de información
 List<InfoPoint> infoPoints = [
   InfoPoint(
     id: 1,
-    position: const Offset(100, 150),
-    title: "Invernadero",
-    description: "Punto 1",
-    imagePath: 'ima/15.jpg',
+    position: const Offset(500, 1400),
+    title: "Peidra de la Perserverancia",
+    description: "Esta piedra representa la base en la que fue construido el colegio ICAM",
+    imagePath: 'ima/Piedra.jpg',
   ),
   InfoPoint(
     id: 2,
-    position: const Offset(200, 300),
+    position: const Offset(250, 370),
     title: "Título 2",
     description: "Descripción 2",
     imagePath: 'ima/2.jpg',
   ),
   InfoPoint(
     id: 3,
-    position: const Offset(100, 450),
+    position: const Offset(600, 925),
     title: "Título 3",
     description: "Descripción 3",
     imagePath: 'ima/3.jpg',
   ),
   InfoPoint(
     id: 4,
-    position: const Offset(400, 300),
+    position: const Offset(350, 870),
     title: "Título 4",
     description: "Descripción 4",
     imagePath: 'ima/4.jpg',
   ),
   InfoPoint(
     id: 5,
-    position: const Offset(490, 220),
+    position: const Offset(640, 220),
     title: "Invernadero",
     description: "Punto 1",
     imagePath: 'ima/15.jpg',
   ),
   InfoPoint(
     id: 6,
-    position: const Offset(10, 400),
-    title: "Título 2",
-    description: "Descripción 2",
+    position: const Offset(2800, 350),
+    title: "Título ",
+    description: "Descripción ",
     imagePath: 'ima/2.jpg',
   ),
   InfoPoint(
     id: 7,
-    position: const Offset(70, 870),
-    title: "Título 3",
-    description: "Descripción 3",
-    imagePath: 'ima/3.jpg',
+    position: const Offset(430, 1140),
+    title: "Lombricultivo",
+    description: 'El humus de lombricomposta ayuda a:\n\nMejorar los suelos devolviendo sus propiedades de'
+    'absorción y retención de humedad.\n\nAumentar la productividad al fertilizar suelos y'
+    'reducir costos al requerir menos insumos quimicos.',
+    imagePath: 'ima/HuertoF.jpg',
   ),
   InfoPoint(
     id: 8,
-    position: const Offset(300, 100),
-    title: "Título 4",
-    description: "Descripción 4",
+    position: const Offset(400, 300),
+    title: "Título 11",
+    description: "Descripción 11",
+    imagePath: 'ima/4.jpg',
+  ),
+  InfoPoint(
+    id: 9,
+    position: const Offset(390, 1190),
+    title: "Título 9",
+    description: "Descripción 9",
+    imagePath: 'ima/4.jpg',
+  ),
+  InfoPoint(
+    id: 10,
+    position: const Offset(320, 800),
+    title: "Título 15",
+    description: "Descripción 15",
+    imagePath: 'ima/4.jpg',
+  ),
+  InfoPoint(
+    id: 11,
+    position: const Offset(500, 1100),
+    title: "Título inv",
+    description: "Descripción inv",
+    imagePath: 'ima/4.jpg',
+  ),
+  InfoPoint(
+    id: 12,
+    position: const Offset(380, 1100),
+    title: "Título bomba",
+    description: "Descripción bomba",
+    imagePath: 'ima/4.jpg',
+  ),
+  InfoPoint(
+    id: 13,
+    position: const Offset(310, 515),
+    title: "Título Api",
+    description: "Descripción Api",
     imagePath: 'ima/4.jpg',
   ),
 ];
 
-// Widget del mapa interactivo
 class InteractiveMap extends StatefulWidget {
   const InteractiveMap({super.key});
 
@@ -97,7 +132,7 @@ class _InteractiveMapState extends State<InteractiveMap>
     super.initState();
     _controller = AnimationController(
       duration: const Duration(milliseconds: 300),
-      vsync: this, // Necesita SingleTickerProviderStateMixin para funcionar
+      vsync: this,
     );
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
   }
@@ -112,22 +147,18 @@ class _InteractiveMapState extends State<InteractiveMap>
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     final double mapWidth = screenSize.width;
-    final double mapHeight = screenSize.height * 0.3; // Ajusta esto según el tamaño de tu mapa
+    final double mapHeight = screenSize.height * 0.3;
 
-    // Asegúrate de que la imagen del mapa se ajuste correctamente al área destinada
     Widget mapImage = Positioned.fill(
       child: Image.asset(
-        'ima/Map1.png',
+        'ima/MapaI.png',
         width: mapWidth,
         height: mapHeight,
         fit: BoxFit.cover,
       ),
     );
 
-    // Genera los widgets para los puntos de información encima de la imagen del mapa
     List<Widget> pointWidgets = infoPoints.map((point) {
-      // Calcular las posiciones relativas para cada punto
-      // El cálculo debe ajustarse para que los puntos coincidan con las ubicaciones en la imagen del mapa
       final double relativeX = (point.position.dx / 1000) * mapWidth;
       final double relativeY = (point.position.dy / 1000) * mapHeight;
 
@@ -141,15 +172,14 @@ class _InteractiveMapState extends State<InteractiveMap>
       );
     }).toList();
 
-    // Construye la pila con la imagen del mapa y los widgets de los puntos
     return SizedBox(
       width: mapWidth,
       height: mapHeight,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          mapImage, // La imagen del mapa siempre al fondo
-          ...pointWidgets, // Los puntos de ubicación encima de la imagen del mapa
+          mapImage,
+          ...pointWidgets,
         ],
       ),
     );
@@ -201,8 +231,8 @@ class InfoRuta1 extends StatelessWidget {
             );
           },
         ),
+        centerTitle: true,
         title: Text(
-          // Coloca el texto del título aquí
           'Información del Recorrido',
           style: TextStyle(
             fontSize: 16.0,
@@ -227,8 +257,8 @@ class InfoRuta1 extends StatelessWidget {
             ),
           ),
           Container(
-            height: 255,
-            width: 380,
+            height: 370,
+            width: screenWidth,
             child: InteractiveMap(),
           ),
           Expanded(
@@ -248,8 +278,7 @@ class InfoRuta1 extends StatelessWidget {
                 padding: EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment
-                      .start, // Alineación al inicio para el título
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Perfil del Recorrido',
@@ -259,15 +288,9 @@ class InfoRuta1 extends StatelessWidget {
                         color: Color(0xff224C55),
                       ),
                     ),
-                    SizedBox(
-                        height: 10), // Un poco de espacio después del título
-
-                    SizedBox(height: 10), // Espacio antes del gráfico
-                    // Agrega aquí tu widget de gráfico (por ejemplo, un gráfico de líneas para el perfil de altitud)
-                    // Puedes usar paquetes como fl_chart, charts_flutter, etc.
-                    SizedBox(height: 10), // Un poco de espacio después del título
+                    SizedBox(height: 10),
                     InteractiveImage(
-                      imagePath: 'ima/graficoR1.png', // Reemplaza con tu ruta de imagen
+                      imagePath: 'ima/graficoR1.png',
                     ),
                   ],
                 ),
@@ -276,7 +299,7 @@ class InfoRuta1 extends StatelessWidget {
           ),
           Container(
             width: screenWidth,
-            height: 150,
+            height: 120,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: const [
@@ -333,13 +356,13 @@ class _InteractiveImageState extends State<InteractiveImage> {
 
   void _onTapDown(TapDownDetails details) {
     setState(() {
-      _scale = 1.1; // Enlarge the image by 10%
+      _scale = 1.1;
     });
   }
 
   void _onTapUp(TapUpDetails details) {
     setState(() {
-      _scale = 1.0; // Return to original size
+      _scale = 1.0;
     });
   }
 
@@ -351,7 +374,6 @@ class _InteractiveImageState extends State<InteractiveImage> {
       child: Transform.scale(
         scale: _scale,
         child: Image.asset(widget.imagePath),
-
       ),
     );
   }

@@ -21,59 +21,83 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Manual 📙"),
-      ),
-      body: Stack(
-        children: <Widget>[
-          PDFView(
-            filePath: widget.path,
-            enableSwipe: true,
-            swipeHorizontal: true,
-            autoSpacing: false,
-            pageFling: true,
-            pageSnap: true,
-            defaultPage: currentPage!,
-            fitPolicy: FitPolicy.BOTH,
-            preventLinkNavigation:
-            false, // if set to true the link is handled in flutter
-            onRender: (_pages) {
-              setState(() {
-                pages = _pages;
-                isReady = true;
-              });
-            },
-            onError: (error) {
-              setState(() {
-                errorMessage = error.toString();
-              });
-            },
-            onPageError: (page, error) {
-              setState(() {
-                errorMessage = '$page: ${error.toString()}';
-              });
-            },
-            onViewCreated: (PDFViewController pdfViewController) {
-              _controller.complete(pdfViewController);
-            },
-            onLinkHandler: (String? uri) {
-            },
-            onPageChanged: (int? page, int? total) {
-              setState(() {
-                currentPage = page;
-              });
-            },
-          ),
-          errorMessage.isEmpty
-              ? !isReady
-              ? const Center(
-            child: CircularProgressIndicator(),
-          )
-              : Container()
-              : Center(
-            child: Text(errorMessage),
-          )
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              color: const Color(0xffd9d9d9),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const Text(
+                    'Manual de Usuario',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(width: 30),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Stack(
+                children: <Widget>[
+                  PDFView(
+                    filePath: widget.path,
+                    enableSwipe: true,
+                    swipeHorizontal: true,
+                    autoSpacing: false,
+                    pageFling: true,
+                    pageSnap: true,
+                    defaultPage: currentPage!,
+                    fitPolicy: FitPolicy.BOTH,
+                    preventLinkNavigation: false,
+                    onRender: (_pages) {
+                      setState(() {
+                        pages = _pages;
+                        isReady = true;
+                      });
+                    },
+                    onError: (error) {
+                      setState(() {
+                        errorMessage = error.toString();
+                      });
+                    },
+                    onPageError: (page, error) {
+                      setState(() {
+                        errorMessage = '$page: ${error.toString()}';
+                      });
+                    },
+                    onViewCreated: (PDFViewController pdfViewController) {
+                      _controller.complete(pdfViewController);
+                    },
+                    onLinkHandler: (String? uri) {},
+                    onPageChanged: (int? page, int? total) {
+                      setState(() {
+                        currentPage = page;
+                      });
+                    },
+                  ),
+                  if (!isReady)
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  if (errorMessage.isNotEmpty)
+                    Center(
+                      child: Text(errorMessage),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FutureBuilder<PDFViewController>(
         future: _controller.future,

@@ -68,122 +68,256 @@ class MenuLateral extends StatelessWidget {
     });
   }
 
+  List<Widget> _buildAdminMenu(BuildContext context, Map<String, dynamic> datosUsuario, String urlFotoPerfil) {
+    List<Widget> menuItems = List<Widget>.from(_buildStandardMenu(context, datosUsuario, urlFotoPerfil));
+    menuItems.add(
+      _crearListTile(
+        icono: Icons.admin_panel_settings,
+        texto: 'Crear Administrador',
+        onTap: () {
+          _mostrarDialogoCrearAdmin(context);
+        },
+      ),
+    );
+    return menuItems;
+  }
+
+  List<Widget> _buildStandardMenu(BuildContext context, Map<String, dynamic> datosUsuario, String urlFotoPerfil) {
+    return [
+      _crearListTile(
+        icono: Icons.book,
+        texto: 'Manual de Usuario',
+        onTap: () => _abrirManualUsuario(context),
+      ),
+      _crearListTile(
+        icono: Icons.description,
+        texto: 'Términos y Condiciones',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => TerminosCondiciones()),
+        ),
+      ),
+      _crearListTile(
+        icono: Icons.info,
+        texto: 'Acerca De',
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => AcercaDe()),
+        ),
+      ),
+      _crearListTile(
+        icono: Icons.exit_to_app,
+        texto: 'Salir de la App',
+        onTap: () => _confirmarCerrarSesion(context),
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     User? usuario = FirebaseAuth.instance.currentUser;
     return Drawer(
-      child: Column(
-        children: [
-          SizedBox(height: MediaQuery.of(context).padding.top),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                usuario != null
-                    ? StreamBuilder<Map<String, dynamic>>(
-                        stream: obtenerDatosUsuario(usuario.uid),
-                        builder: (context, snapshotDatosUsuario) {
-                          if (snapshotDatosUsuario.connectionState ==
-                              ConnectionState.waiting) {
-                            return const DrawerHeader(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else if (snapshotDatosUsuario.hasError) {
-                            return const DrawerHeader(
-                              child: Text(
-                                  'Error al obtener los datos del usuario'),
-                            );
-                          } else {
-                            Map<String, dynamic> datosUsuario =
-                                snapshotDatosUsuario.data ?? {};
-                            String nombre = datosUsuario['nombre'] ??
-                                'Nombre no disponible';
-                            String correo = datosUsuario['correo'] ??
-                                'Correo no disponible';
-                            return FutureBuilder<String>(
-                              future: obtenerUrlFotoPerfil(usuario.uid),
-                              builder: (context, snapshotFotoPerfil) {
-                                if (snapshotFotoPerfil.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const DrawerHeader(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else if (snapshotFotoPerfil.hasError) {
-                                  return const DrawerHeader(
-                                    child: Text(
-                                        'Error al obtener la foto de perfil'),
-                                  );
-                                } else {
-                                  String urlFotoPerfil =
-                                      snapshotFotoPerfil.data ?? '';
-                                  return UserAccountsDrawerHeader(
-                                    decoration: const BoxDecoration(
-                                      color: Color(
-                                          0xff072931), // Cambia 'tuColorDeseado' por el color que quieras
-                                    ),
-                                    accountName: Text(nombre),
-                                    accountEmail: Text(correo),
-                                    currentAccountPicture: CircleAvatar(
-                                      backgroundImage:
-                                          NetworkImage(urlFotoPerfil),
-                                    ),
-                                  );
-                                }
-                              },
-                            );
-                          }
-                        },
-                      )
-                    : const UserAccountsDrawerHeader(
-                        accountName: Text('Invitado'),
-                        accountEmail: Text(''),
-                      ),
-                _crearListTile(
-                  icono: Icons.book,
-                  texto: 'Manual de Usuario',
-                  onTap: () {
-                    _abrirManualUsuario(context);
-                  },
-                ),
-                _crearListTile(
-                  icono: Icons.description,
-                  texto: 'Términos y Condiciones',
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => TerminosCondiciones(),
-                      ),
-                    );
-                  },
-                ),
-                _crearListTile(
-                  icono: Icons.info,
-                  texto: 'Acerca De',
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AcercaDe(),
-                      ),
-                    );
-                  },
-                ),
-                _crearListTile(
-                  icono: Icons.exit_to_app,
-                  texto: 'Salir de la App',
-                  onTap: () {
-                    _confirmarCerrarSesion(context);
-                  },
-                ),
-              ],
+      child: SafeArea(  // Envuelve tus widgets con SafeArea
+        child: Column(
+          children: [
+            // Construcción del encabezado del usuario o un encabezado por defecto
+            Builder(
+              builder: (context) {
+                if (usuario != null) {
+                  return _buildUserHeader(context, usuario);
+                } else {
+                  return const DrawerHeader(
+                    decoration: BoxDecoration(color: Color(0xff072931)),
+                    child: Text('Bienvenido Invitado'),
+                  );
+                }
+              },
             ),
-          ),
-        ],
+            Expanded(
+              child: _buildMenuItems(context, usuario),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  Widget _buildUserHeader(BuildContext context, User usuario) {
+    return StreamBuilder<Map<String, dynamic>>(
+      stream: obtenerDatosUsuario(usuario.uid),
+      builder: (context, snapshotDatosUsuario) {
+        if (snapshotDatosUsuario.connectionState == ConnectionState.waiting) {
+          return const DrawerHeader(
+            decoration: BoxDecoration(color: Color(0xff072931)),
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshotDatosUsuario.hasError || !snapshotDatosUsuario.hasData) {
+          return const DrawerHeader(
+            decoration: BoxDecoration(color: Color(0xff072931)),
+            child: Text('Error al obtener los datos del usuario'),
+          );
+        } else {
+          String nombre = snapshotDatosUsuario.data?['nombre'] ?? 'Nombre no disponible';
+          String correo = snapshotDatosUsuario.data?['correo'] ?? 'Correo no disponible';
+          return FutureBuilder<String>(
+            future: obtenerUrlFotoPerfil(usuario.uid),
+            builder: (context, snapshotFotoPerfil) {
+              String urlFotoPerfil = snapshotFotoPerfil.data ?? '';
+              return UserAccountsDrawerHeader(
+                decoration: const BoxDecoration(
+                  color: Color(0xff072931),
+                ),
+                accountName: Text(nombre),
+                accountEmail: Text(correo),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: urlFotoPerfil.isNotEmpty ? NetworkImage(urlFotoPerfil) : null,
+                  child: urlFotoPerfil.isEmpty ? const Icon(Icons.person, size: 50) : null,
+                ),
+              );
+            },
+          );
+        }
+      },
+    );
+  }
+
+
+  Widget _buildMenuItems(BuildContext context, User? usuario) {
+    if (usuario != null) {
+      return FutureBuilder<String>(
+        future: obtenerRolDeUsuario(usuario.uid),
+        builder: (context, snapshotRol) {
+          if (snapshotRol.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          String rol = snapshotRol.data ?? 'Invitado';
+          List<Widget> menuItems = rol == 'Administrador'
+              ? _buildAdminMenu(context, {}, '')
+              : _buildStandardMenu(context, {}, '');
+
+          return ListView(children: menuItems);
+        },
+      );
+    } else {
+      return ListView(children: _buildStandardMenu(context, {}, ''));
+    }
+  }
+
+  void _mostrarDialogoCrearAdmin(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Crear nuevo administrador'),
+          content: TextField(
+            controller: emailController,
+            decoration: InputDecoration(hintText: 'Correo electrónico'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: Text('Crear'),
+              onPressed: () {
+                _asignarRolAdministrador(emailController.text, context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _asignarRolAdministrador(String email, BuildContext context) async {
+    try {
+      // Buscar el usuario por correo electrónico
+      var userQuery = await FirebaseFirestore.instance.collection('users').where('correo', isEqualTo: email).get();
+      if (userQuery.docs.isEmpty) {
+        _mostrarMensaje(context, "Usuario no encontrado.");
+        return;
+      }
+
+      var userId = userQuery.docs.first.id;
+
+      // Actualizar el rol del usuario a 'Administrador'
+      await FirebaseFirestore.instance.collection('users').doc(userId).update({
+        'rol': 'Administrador',
+      });
+
+      Navigator.of(context).pop(); // Cierra el diálogo
+      _mostrarMensaje(context, "Administrador creado correctamente.");
+    } catch (e) {
+      print("Error al asignar rol de administrador: $e");
+      if (e is FirebaseException) {
+        _mostrarMensaje(context, "Firebase Error: ${e.message}");
+      } else {
+        _mostrarMensaje(context, "Error desconocido: $e");
+      }
+    }
+  }
+
+  void _mostrarMensaje(BuildContext context, String mensaje) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Información'),
+          content: Text(mensaje),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Aceptar'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _crearAdministrador(String email, String password, BuildContext context) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
+        'correo': email,
+        'rol': 'Administrador',
+        // Agrega cualquier otro dato relevante
+      });
+
+      Navigator.of(context).pop(); // Cierra el diálogo
+      // Mostrar confirmación o realizar acciones después de crear el administrador
+    } catch (e) {
+      // Manejar errores, por ejemplo, mostrar un mensaje
+      print("Error al crear administrador: $e");
+    }
+  }
+
+  Future<String> obtenerRolDeUsuario(String uid) async {
+    try {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      if (userDoc.exists) {
+        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+        return userData['rol'] ?? 'Invitado';
+      } else {
+        return 'Invitado';
+      }
+    } catch (e) {
+      print("Error al obtener rol de usuario: $e");
+      return 'Invitado';
+    }
+  }
+
 }
 
-Widget _crearListTile({required IconData icono, required String texto, required VoidCallback onTap}) {
+Widget _crearListTile(
+    {required IconData icono,
+    required String texto,
+    required VoidCallback onTap}) {
   return InkWell(
     onTap: onTap,
     child: Container(
@@ -197,7 +331,8 @@ Widget _crearListTile({required IconData icono, required String texto, required 
         children: [
           Icon(icono, color: Colors.grey.shade600, size: 24.0),
           const SizedBox(width: 20.0),
-          Expanded( // Asegúrate de que el texto no se superponga con el icono
+          Expanded(
+            // Asegúrate de que el texto no se superponga con el icono
             child: Text(
               texto,
               style: const TextStyle(
@@ -207,7 +342,8 @@ Widget _crearListTile({required IconData icono, required String texto, required 
               ),
             ),
           ),
-          Icon(Icons.arrow_forward_ios, size: 13.0, color: Colors.grey.shade400),
+          Icon(Icons.arrow_forward_ios,
+              size: 13.0, color: Colors.grey.shade400),
         ],
       ),
     ),
@@ -227,17 +363,17 @@ void _confirmarCerrarSesion(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Cerrar Sesión"),
-        content: Text("¿Estás seguro de que quieres cerrar sesión?"),
+        title: const Text("Cerrar Sesión"),
+        content: const Text("¿Estás seguro de que quieres cerrar sesión?"),
         actions: <Widget>[
           TextButton(
-            child: Text("Cancelar"),
+            child: const Text("Cancelar"),
             onPressed: () {
               Navigator.of(context).pop(); // Cierra el cuadro de diálogo
             },
           ),
           TextButton(
-            child: Text("Aceptar"),
+            child: const Text("Aceptar"),
             onPressed: () {
               // Cerrar sesión y redirigir al login
               _cerrarSesion(context);
@@ -252,8 +388,8 @@ void _confirmarCerrarSesion(BuildContext context) {
 void _cerrarSesion(BuildContext context) async {
   await FirebaseAuth.instance.signOut();
   Navigator.of(context).pushAndRemoveUntil(
-    MaterialPageRoute(builder: (context) => LoginPage()),
-        (Route<dynamic> route) => false, // Esto elimina todas las rutas anteriores
+    MaterialPageRoute(builder: (context) => const LoginPage()),
+    (Route<dynamic> route) => false, // Esto elimina todas las rutas anteriores
   );
 }
 
@@ -300,7 +436,7 @@ class MyScreen extends StatelessWidget {
                               () => Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => Proyectos()))),
+                                      builder: (_) => const Proyectos()))),
                           _buildButton(
                               context,
                               'Senderos Ecológicos',
@@ -308,7 +444,7 @@ class MyScreen extends StatelessWidget {
                               () => Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => Senderos()))),
+                                      builder: (_) => const Senderos()))),
                         ],
                       ),
                     ),
@@ -361,7 +497,7 @@ class MyScreen extends StatelessWidget {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (_) => PagPrincipal()),
+                MaterialPageRoute(builder: (_) => const PagPrincipal()),
               );
             },
           ),

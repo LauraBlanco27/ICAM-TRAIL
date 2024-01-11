@@ -2,22 +2,20 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:provider/provider.dart';
-import 'View/Servicios.dart';
+import 'Model/User.dart';
 import 'firebase_options.dart';
-import 'DTO/User.dart';
 import 'View/Login.dart';
 import 'View/constants.dart';
 
 void main() async {
   await dotenv
-      .load(); // Asegúrate de que esta es la manera correcta de cargar tus variables de entorno
+      .load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
     MaterialApp(
       home:
-          FirebaseInitializer(), // Asumiendo que FirebaseInitializer es un widget
+          FirebaseInitializer(),
     ),
   );
 }
@@ -96,9 +94,9 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Center(
             child: Image.asset(
-              'ima/LogoAppI.png',
-              width: 0.4 * width,
-              height: 0.4 * height,
+              'ima/ICAMTrail.png',
+              width: 0.6 * width,
+              height: 0.6 * height,
             ),
           ),
           Padding(

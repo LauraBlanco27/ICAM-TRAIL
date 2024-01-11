@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../Model/Reportes.dart';
 import 'Servicios.dart';
 
 Future<void> reportarIncidente(BuildContext context, String descripcion, double latitud, double longitud) async {
@@ -12,13 +13,13 @@ Future<void> reportarIncidente(BuildContext context, String descripcion, double 
     descripcion: descripcion,
     fecha: fecha,
     latitud: latitud,
-    longitud: longitud,
+    longitud: longitud, id: '',
   );
 
-  await guardarReporte(reporte);
+  await guardarReporte(reporte.descripcion, context);
 
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text('Incidente reportado con éxito')),
+    const SnackBar(content: Text('Incidente reportado con éxito')),
   );
 }
 
@@ -43,23 +44,23 @@ class ProgressPanel extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Reportar Incidente'),
+          title: const Text('Reportar Incidente'),
           content: TextField(
             controller: _controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Describe el incidente aquí...',
             ),
             maxLines: 3,
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancelar'),
+              child: const Text('Cancelar'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Reportar'),
+              child: const Text('Reportar'),
               onPressed: () {
                 if (_controller.text.isNotEmpty) {
                   reportarIncidente(
@@ -85,7 +86,7 @@ class ProgressPanel extends StatelessWidget {
     // Verificar si el usuario está autenticado
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Por favor, inicia sesión primero.')),
+        const SnackBar(content: Text('Por favor, inicia sesión primero.')),
       );
       return;
     }
@@ -114,7 +115,7 @@ class ProgressPanel extends StatelessWidget {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No se seleccionó ninguna foto')),
+        const SnackBar(content: Text('No se seleccionó ninguna foto')),
       );
     }
   }
@@ -132,7 +133,7 @@ class ProgressPanel extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.8),
         borderRadius: BorderRadius.circular(25),
@@ -143,50 +144,50 @@ class ProgressPanel extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 "Progreso del Sendero",
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
               ),
               IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
+                icon: const Icon(Icons.close, color: Colors.white),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           CustomPaint(
             painter: ProgressLine(porcentajeRecorrido),
             child: Container(height: 30),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "${distanciaRecorrida.toStringAsFixed(2)} km recorridos",
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               Text(
                 "${(distanciaTotal - distanciaRecorrida).toStringAsFixed(2)} km restantes",
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
                 onTap: () => mostrarDialogoReporte(context),
-                child: Icon(Icons.send_to_mobile, color: Colors.white),
+                child: const Icon(Icons.send_to_mobile, color: Colors.white),
               ),
               GestureDetector(
                 onTap: onPhotoIconTap,
-                child: Icon(Icons.photo, color: Colors.white),
+                child: const Icon(Icons.photo, color: Colors.white),
               ),
               GestureDetector(
                 onTap: onMapIconTap,
-                child: Icon(Icons.map, color: Colors.white),
+                child: const Icon(Icons.map, color: Colors.white),
               ),
             ],
           ),

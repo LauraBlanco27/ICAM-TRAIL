@@ -174,8 +174,8 @@ class _PerfilState extends State<Perfil> {
     return Scaffold(
       backgroundColor: const Color(0xffFFFFFF),
       body: SafeArea(
-        child: LayoutBuilder(builder: (context, constraints) {
-          return Column(
+        child: SingleChildScrollView(
+          child: Column(
             children: [
               Container(
                 color: const Color(0xffd9d9d9),
@@ -289,9 +289,11 @@ class _PerfilState extends State<Perfil> {
                     ),
                     const SizedBox(height: 16),
                     TextButton(
-                      onPressed:
-                          urlImagenPerfil != null ? _eliminarFotoPerfil : null,
-                      child: const Text('Eliminar foto de perfil'),
+                      onPressed: urlImagenPerfil != null ? _eliminarFotoPerfil : null,
+                      child: Text(
+                        'Eliminar foto de perfil',
+                        style: TextStyle(color: Color(0xff072931)), // Aplica el estilo aquí
+                      ),
                     ),
                     const SizedBox(height: 16),
                     TextField(
@@ -311,6 +313,12 @@ class _PerfilState extends State<Perfil> {
                     ElevatedButton(
                       onPressed: _actualizarDatosUsuario,
                       child: const Text('Actualizar datos'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor:
+                            const Color(0xff072931), // Color del texto
+                        // Añade aquí otros estilos si los necesitas
+                      ),
                     ),
                   ],
                 ),
@@ -324,25 +332,29 @@ class _PerfilState extends State<Perfil> {
                       return FutureBuilder<List<String>>(
                         future: obtenerUrlsFotosUsuario(usuario!.uid),
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
                             return Center(child: CircularProgressIndicator());
                           }
 
                           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                            return Center(child: Text('No hay fotos disponibles'));
+                            return Center(
+                                child: Text('No hay fotos disponibles'));
                           }
 
                           final fotosUrls = snapshot.data!;
 
                           return GridView.builder(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                               crossAxisSpacing: 4,
                               mainAxisSpacing: 4,
                             ),
                             itemCount: fotosUrls.length,
                             itemBuilder: (context, index) {
-                              return Image.network(fotosUrls[index], fit: BoxFit.cover);
+                              return Image.network(fotosUrls[index],
+                                  fit: BoxFit.cover);
                             },
                           );
                         },
@@ -351,7 +363,12 @@ class _PerfilState extends State<Perfil> {
                   );
                 },
                 child: const Text('Ver fotos'),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xff072931),
+                ),
               ),
+              //_buildPhotoGallery(),
               // Widget para mostrar las fotos del usuario
               GridView.builder(
                 shrinkWrap: true,
@@ -366,15 +383,16 @@ class _PerfilState extends State<Perfil> {
                   return GestureDetector(
                     onTap: () => _verGaleriaCompleta(context, index),
                     child: Hero(
-                      tag: 'foto$index', // Asegúrate de que el tag sea único para cada foto.
+                      tag:
+                          'foto$index', // Asegúrate de que el tag sea único para cada foto.
                       child: Image.network(fotosUrls[index], fit: BoxFit.cover),
                     ),
                   );
                 },
               ),
             ],
-          );
-        }),
+          ),
+        ),
       ),
       bottomNavigationBar: _buildBottomBar(context),
     );
@@ -408,6 +426,39 @@ class _PerfilState extends State<Perfil> {
       ),
     );
   }
+
+  Widget _buildPhotoGallery() {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 4,
+        mainAxisSpacing: 4,
+      ),
+      itemCount: fotosUrls.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () => _verGaleriaCompleta(context, index),
+          child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 5,
+            child: Hero(
+              tag: 'foto$index',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  fotosUrls[index],
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
 class GaleriaCompletaScreen extends StatelessWidget {
@@ -424,7 +475,28 @@ class GaleriaCompletaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Galería'),
+        backgroundColor: const Color(0xffd9d9d9),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => Perfil()),
+            );
+          },
+        ),
+        title: const Text(
+          'Galería',
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          const SizedBox(width: 30),
+        ],
       ),
       body: PageView.builder(
         itemCount: urlsFotos.length,

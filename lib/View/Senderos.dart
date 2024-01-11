@@ -92,7 +92,7 @@ class MyScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: buttonHeight * 0.4, horizontal: buttonWidth * 0.2),
                       ),
                       child: const Text(
-                        'Recorrido Completo',
+                        'Sendero Completo',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class MyScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: buttonHeight * 0.4, horizontal: buttonWidth * 0.2),
                       ),
                       child: const Text(
-                        '   Recorrido Corto   ',
+                        '    Sendero Corto   ',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

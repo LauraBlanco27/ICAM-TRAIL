@@ -114,8 +114,8 @@ class SenderosScreen extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 20),
                                 child: Text(
-                                  '\nDescripción extensa del sendero recorrido. Puedes agregar mucho texto aquí y al llegar al final de la capacidad del contenedor, podrás hacer scroll para seguir leyendo. \n\nEsta es una forma muy útil para mostrar información que no cabe en el espacio visual disponible en pantalla.\n\n'
-                                  'Descripción extensa del sendero recorrido. Puedes agregar mucho texto aquí y al llegar al final de la capacidad del contenedor, podrás hacer scroll para seguir leyendo.\n\nEsta es una forma muy útil para mostrar información que no cabe en el espacio visual disponible en pantalla.',
+                                  '\nEn este recorrido comenzarás explorando el fascinante mundo de la lombricomposta, aprendiendo sobre la transformación de desechos orgánicos en abono. Luego, pasarás al huerto familiar para entender las técnicas de cultivo casero, seguido de una visita al invernadero, donde se controlan las condiciones ambientales para optimizar el crecimiento de las plantas.\n\nContinuarás con el riego eficiente, descubriendo sistemas como el riego por goteo que ayudan a conservar el agua. A continuación, encontrarás el reservorio de agua, aprendiendo sobre la recolección y almacenamiento del agua de lluvia, vital en la gestión sostenible de recursos hídricos.\n\n'
+                                  'La apicultura te revelará la importancia de las abejas en la polinización y la biodiversidad, seguida por el sistema silvopastoril, que integra árboles, pastos y ganado en un ecosistema equilibrado. Luego, el sistema silvoagrícola te mostrará la colaboración entre la agricultura y la arboricultura.\n\nFinalmente, terminarás tu recorrido aprendiendo sobre la agricultura de conservación, que combina técnicas de cultivo sostenibles con alta productividad. Este recorrido en realidad aumentada no solo es educativo, sino también una ventana a prácticas ecológicas y sostenibles en la agricultura y la gestión de recursos naturales.',
                                   style: TextStyle(
                                     color: Color(0xff8a8a8a),
                                     fontSize: 17,
@@ -185,7 +185,7 @@ class SenderosScreen extends StatelessWidget {
                                       'Información de Ruta',
                                       style: TextStyle(
                                           color: Color(0xffd9d9d9),
-                                          fontSize: 16),
+                                          fontSize: 14),
                                     ),
                                   ],
                                 ),
