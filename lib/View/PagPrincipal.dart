@@ -25,7 +25,7 @@ class PagPrincipal extends StatelessWidget {
             children: [
               Positioned.fill(
                 child: Image.asset(
-                  'ima/fondoP.jpg',
+                  'ima/IPagPrincipal.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -432,7 +432,7 @@ class MyScreen extends StatelessWidget {
                           _buildButton(
                               context,
                               'Proyectos Educativos',
-                              'ima/proyectos.png',
+                              'assets/Gif/ProyectosEdu.gif',
                               () => Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -440,7 +440,7 @@ class MyScreen extends StatelessWidget {
                           _buildButton(
                               context,
                               'Senderos Ecológicos',
-                              'ima/ruta.png',
+                              'assets/Gif/Sendero.gif',
                               () => Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -456,7 +456,7 @@ class MyScreen extends StatelessWidget {
                           _buildButton(
                               context,
                               'Servicios',
-                              'ima/servicio.png',
+                              'assets/Gif/servicio.gif',
                               () => Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -464,7 +464,7 @@ class MyScreen extends StatelessWidget {
                           _buildButton(
                               context,
                               'Desafíos',
-                              'ima/objetivo.png',
+                              'assets/Gif/desafio.gif',
                               () => Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -525,18 +525,14 @@ class MyScreen extends StatelessWidget {
         width: size,
         height: size,
         decoration: const BoxDecoration(
-            shape: BoxShape.circle, color: Color.fromRGBO(7, 41, 49, 0.5)),
+            shape: BoxShape.circle, color: Color.fromRGBO(7, 41, 49, 0.7)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              radius: 30,
+              radius: size * 0.3, // Ajusta el tamaño del círculo aquí
               backgroundColor: Colors.white,
-              child: Image.asset(
-                imagePath,
-                width: size * 0.5,
-                height: size * 0.5,
-              ),
+              backgroundImage: AssetImage(imagePath), // Usa AssetImage para el GIF
             ),
             SizedBox(height: size * 0.05),
             Text(

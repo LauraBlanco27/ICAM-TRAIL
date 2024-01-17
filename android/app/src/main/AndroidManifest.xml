@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.ucundinamarca.proyecto1">
    <application
-        android:label="proyecto1"
-        android:icon="@mipmap/ic_launcher">
+        android:label="ICAM Trail"
+        android:icon="@mipmap/launcher_icon">
 
         <activity
             android:name=".MainActivity"

@@ -51,7 +51,7 @@ class SenderosScreen extends StatelessWidget {
               builder: (context, constraints) {
                 double topContainerHeight = constraints.maxHeight * 0.06;
                 double titleContainerHeight = constraints.maxHeight * 0.079;
-                double middleContainerHeight = constraints.maxHeight * 0.478;
+                double middleContainerHeight = constraints.maxHeight * 0.4935;
                 return Column(
                   children: [
                     Container(
@@ -111,14 +111,15 @@ class SenderosScreen extends StatelessWidget {
                           Expanded(
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Text(
-                                  '\nEn este recorrido comenzarás explorando el fascinante mundo de la lombricomposta, aprendiendo sobre la transformación de desechos orgánicos en abono. Luego, pasarás al huerto familiar para entender las técnicas de cultivo casero, seguido de una visita al invernadero, donde se controlan las condiciones ambientales para optimizar el crecimiento de las plantas.\n\nContinuarás con el riego eficiente, descubriendo sistemas como el riego por goteo que ayudan a conservar el agua. A continuación, encontrarás el reservorio de agua, aprendiendo sobre la recolección y almacenamiento del agua de lluvia, vital en la gestión sostenible de recursos hídricos.\n\n'
-                                  'La apicultura te revelará la importancia de las abejas en la polinización y la biodiversidad, seguida por el sistema silvopastoril, que integra árboles, pastos y ganado en un ecosistema equilibrado. Luego, el sistema silvoagrícola te mostrará la colaboración entre la agricultura y la arboricultura.\n\nFinalmente, terminarás tu recorrido aprendiendo sobre la agricultura de conservación, que combina técnicas de cultivo sostenibles con alta productividad. Este recorrido en realidad aumentada no solo es educativo, sino también una ventana a prácticas ecológicas y sostenibles en la agricultura y la gestión de recursos naturales.',
-                                  style: TextStyle(
-                                    color: Color(0xff8a8a8a),
-                                    fontSize: 17,
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: RichText(
+                                  textAlign: TextAlign.justify,
+                                  text: TextSpan(
+                                    text: '\nEn este recorrido comenzarás explorando el fascinante mundo de la lombricomposta, aprendiendo sobre la transformación de desechos orgánicos en abono. Luego, pasarás al huerto familiar para entender las técnicas de cultivo casero, seguido de una visita al invernadero, donde se controlan las condiciones ambientales para optimizar el crecimiento de las plantas.\n\nContinuarás con el riego eficiente, descubriendo sistemas como el riego por goteo que ayudan a conservar el agua. A continuación, encontrarás el reservorio de agua, aprendiendo sobre la recolección y almacenamiento del agua de lluvia, vital en la gestión sostenible de recursos hídricos.\n\nLa apicultura te revelará la importancia de las abejas en la polinización y la biodiversidad, seguida por el sistema silvopastoril, que integra árboles, pastos y ganado en un ecosistema equilibrado. Luego, el sistema silvoagrícola te mostrará la colaboración entre la agricultura y la arboricultura.\n\nFinalmente, terminarás tu recorrido aprendiendo sobre la agricultura de conservación, que combina técnicas de cultivo sostenibles con alta productividad. Este recorrido en realidad aumentada no solo es educativo, sino también una ventana a prácticas ecológicas y sostenibles en la agricultura y la gestión de recursos naturales.',
+                                    style: TextStyle(
+                                      color: Color(0xff8a8a8a),
+                                      fontSize: 17,
+                                    ),
                                   ),
                                 ),
                               ),

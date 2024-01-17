@@ -20,38 +20,38 @@ class InfoPoint {
 List<InfoPoint> infoPoints = [
   InfoPoint(
     id: 1,
-    position: const Offset(500, 1400),
+    position: const Offset(510, 1200),
     title: "Peidra de la Perserverancia",
     description: "Esta piedra representa la base en la que fue construido el colegio ICAM",
-    imagePath: 'ima/Piedra.jpg',
+    imagePath: 'ima/1013.png',
   ),
   InfoPoint(
     id: 2,
-    position: const Offset(250, 370),
+    position: const Offset(245, 220),
     title: "Título 2",
     description: "Descripción 2",
-    imagePath: 'ima/2.jpg',
+    imagePath: 'ima/1012.png',
   ),
   InfoPoint(
     id: 3,
-    position: const Offset(600, 925),
+    position: const Offset(600, 790),
     title: "Título 3",
     description: "Descripción 3",
-    imagePath: 'ima/3.jpg',
+    imagePath: 'ima/1016.png',
   ),
   InfoPoint(
     id: 4,
-    position: const Offset(350, 870),
+    position: const Offset(400, 720),
     title: "Título 4",
     description: "Descripción 4",
-    imagePath: 'ima/4.jpg',
+    imagePath: 'ima/1010.png',
   ),
   InfoPoint(
     id: 5,
-    position: const Offset(640, 220),
+    position: const Offset(630, 60),
     title: "Invernadero",
     description: "Punto 1",
-    imagePath: 'ima/15.jpg',
+    imagePath: 'ima/1019.png',
   ),
   InfoPoint(
     id: 6,
@@ -62,54 +62,68 @@ List<InfoPoint> infoPoints = [
   ),
   InfoPoint(
     id: 7,
-    position: const Offset(430, 1140),
+    position: const Offset(430, 980),
     title: "Lombricultivo",
     description: 'El humus de lombricomposta ayuda a:\n\nMejorar los suelos devolviendo sus propiedades de'
     'absorción y retención de humedad.\n\nAumentar la productividad al fertilizar suelos y'
     'reducir costos al requerir menos insumos quimicos.',
-    imagePath: 'ima/HuertoF.jpg',
+    imagePath: 'ima/Lombricomposta.jpg',
   ),
   InfoPoint(
     id: 8,
-    position: const Offset(400, 300),
+    position: const Offset(380, 105),
     title: "Título 11",
     description: "Descripción 11",
-    imagePath: 'ima/4.jpg',
+    imagePath: 'ima/Silvopastoril.jpg',
+  ),
+  InfoPoint(
+    id: 14,
+    position: const Offset(450, 110),
+    title: "Título 11",
+    description: "Descripción 11",
+    imagePath: 'ima/1001.png',
   ),
   InfoPoint(
     id: 9,
-    position: const Offset(390, 1190),
+    position: const Offset(390, 935),
     title: "Título 9",
     description: "Descripción 9",
-    imagePath: 'ima/4.jpg',
+    imagePath: 'ima/1018.png',
   ),
   InfoPoint(
     id: 10,
-    position: const Offset(320, 800),
+    position: const Offset(320, 650),
     title: "Título 15",
     description: "Descripción 15",
-    imagePath: 'ima/4.jpg',
+    imagePath: 'ima/1007.png',
   ),
   InfoPoint(
     id: 11,
-    position: const Offset(500, 1100),
+    position: const Offset(500, 930),
     title: "Título inv",
     description: "Descripción inv",
-    imagePath: 'ima/4.jpg',
+    imagePath: 'ima/Inverndero.jpg',
   ),
   InfoPoint(
     id: 12,
-    position: const Offset(380, 1100),
+    position: const Offset(415, 1100),
     title: "Título bomba",
     description: "Descripción bomba",
-    imagePath: 'ima/4.jpg',
+    imagePath: 'ima/Terraza.jpg',
   ),
   InfoPoint(
     id: 13,
-    position: const Offset(310, 515),
+    position: const Offset(310, 430),
     title: "Título Api",
     description: "Descripción Api",
-    imagePath: 'ima/4.jpg',
+    imagePath: 'ima/Apiii.png',
+  ),
+  InfoPoint(
+    id: 15,
+    position: const Offset(540, 880),
+    title: "Deshidratador Solar",
+    description: "Deshidratador Solar",
+    imagePath: 'ima/1017.png',
   ),
 ];
 
@@ -151,7 +165,7 @@ class _InteractiveMapState extends State<InteractiveMap>
 
     Widget mapImage = Positioned.fill(
       child: Image.asset(
-        'ima/MapaI.png',
+        'ima/MapSendero1.jpg',
         width: mapWidth,
         height: mapHeight,
         fit: BoxFit.cover,
@@ -167,7 +181,7 @@ class _InteractiveMapState extends State<InteractiveMap>
         top: relativeY,
         child: GestureDetector(
           onTap: () => _showPointDialog(context, point),
-          child: Icon(Icons.location_on, color: Colors.red),
+          child: Icon(Icons.location_on, color: Colors.red[900]),
         ),
       );
     }).toList();
@@ -190,27 +204,85 @@ void _showPointDialog(BuildContext context, InfoPoint point) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(point.title),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            if (point.imagePath.isNotEmpty)
-              Image.asset(point.imagePath),
-            Text(point.description),
-          ],
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text('Cerrar'),
-            onPressed: () => Navigator.of(context).pop(),
+      double dialogWidth = 420.0; // Ancho del diálogo
+      double dialogHeight = 450.0; // Altura del diálogo
+
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          width: dialogWidth,
+          height: dialogHeight,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), // Bordes redondeados
           ),
-        ],
+          child: Stack(
+            children: <Widget>[
+              // Imagen
+              ClipRRect( // ClipRRect para aplicar el borderRadius a la imagen
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  point.imagePath,
+                  width: dialogWidth, // Ancho de la imagen igual al del diálogo
+                  height: dialogHeight, // Altura de la imagen igual a la del diálogo
+                  fit: BoxFit.cover,
+                ),
+              ),
+              // Contenido superpuesto
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  width: dialogWidth,
+                  color: Colors.black.withOpacity(0),
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        point.title,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0),
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        point.title,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Botón de cerrar
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                  width: 30, // Ancho del rectángulo
+                  height: 30, // Altura del rectángulo
+                  margin: EdgeInsets.all(8), // Margen para separar el contenedor de los bordes
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5), // Color de fondo con opacidad
+                    borderRadius: BorderRadius.circular(8), // Bordes redondeados
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.of(context).pop(),
+                    padding: EdgeInsets.zero, // Eliminar cualquier padding interno
+                    constraints: BoxConstraints(), // Restricciones mínimas para el botón
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       );
     },
   );
 }
-
 
 class InfoRuta1 extends StatelessWidget {
   @override

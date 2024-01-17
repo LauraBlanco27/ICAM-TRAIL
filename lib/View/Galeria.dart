@@ -1,30 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:image_viewer/image_viewer.dart';
 
 class Galeria1 extends StatefulWidget {
+  const Galeria1({super.key});
+
   @override
   _Galeria1State createState() => _Galeria1State();
 }
 
 class _Galeria1State extends State<Galeria1> {
   List<String> imagenes = [
-    'ima/12.jpg',
-    'ima/1.jpg',
-    'ima/15.jpg',
-    'ima/2.jpg',
-    'ima/3.jpg',
-    'ima/15.jpg',
-    'ima/4.jpg',
-    'ima/5.jpg',
-    'ima/14.jpg',
-    'ima/6.jpg',
-    'ima/7.jpg',
-    'ima/8.jpg',
-    'ima/10.jpg',
-    'ima/11.jpg',
-    'ima/13.jpg',
+    'ima/ruta22.jpg',
+    'ima/ruta23.jpg',
+    'ima/ruta10.jpg',
+    'ima/ruta1.jpg',
+    'ima/ruta3.jpg',
+    'ima/ruta2.jpg',
+    'ima/ruta4.jpg',
+    'ima/ruta29.jpg',
+    'ima/ruta5.jpg',
+    'ima/ruta6.jpg',
+    'ima/ruta7.jpg',
+    'ima/ruta12.jpg',
+    'ima/ruta13.jpg',
+    'ima/ruta15.jpg',
+    'ima/ruta16.jpg',
+    'ima/ruta18.jpg',
+    'ima/ruta19.jpg',
+    'ima/ruta20.jpg',
+    'ima/ruta14.jpg',
+    'ima/ruta25.jpg',
+    'ima/ruta11.jpg',
+    'ima/ruta9.jpg',
+    'ima/ruta7.jpg',
+    'ima/ruta26.jpg',
+    'ima/ruta17.jpg',
+    'ima/ruta24.jpg',
+    'ima/ruta21.jpg',
+    'ima/ruta8.jpg',
   ];
 
   void _openPhotoGallery(BuildContext context, int index) {
@@ -38,8 +52,8 @@ class _Galeria1State extends State<Galeria1> {
             maxScale: PhotoViewComputedScale.covered * 2,
           );
         },
-        scrollPhysics: BouncingScrollPhysics(),
-        backgroundDecoration: BoxDecoration(
+        scrollPhysics: const BouncingScrollPhysics(),
+        backgroundDecoration: const BoxDecoration(
           color: Colors.black,
         ),
         pageController: PageController(initialPage: index),
@@ -53,16 +67,17 @@ class _Galeria1State extends State<Galeria1> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffd9d9d9),
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
-          'Galería Sendero 1',
+        backgroundColor: const Color(0xffd9d9d9),
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text(
+          'Galería',
           style: TextStyle(color: Colors.black),
         ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: GridView.builder(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           itemCount: imagenes.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: itemsPerRow,

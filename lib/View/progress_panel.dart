@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Model/Reportes.dart';
+import 'RecorridoMap.dart';
 import 'Servicios.dart';
 
 Future<void> reportarIncidente(BuildContext context, String descripcion, double latitud, double longitud) async {
@@ -120,6 +121,13 @@ class ProgressPanel extends StatelessWidget {
     }
   }
 
+  void onMapIconTap(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MapScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double porcentajeRecorrido = distanciaRecorrida / distanciaTotal;
@@ -194,6 +202,8 @@ class ProgressPanel extends StatelessWidget {
         ],
       ),
     );
+
+
   }
 }
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'Experiencia2.dart';
+import 'Experiencia1.dart';
 import 'Galeria2.dart';
 import 'InfoRuta2.dart';
 import 'Senderos.dart';
+import 'Video1.dart';
 
 class Sendero2 extends StatefulWidget {
   @override
@@ -49,9 +49,9 @@ class SenderosScreen extends StatelessWidget {
             ),
             LayoutBuilder(
               builder: (context, constraints) {
-                double topContainerHeight = constraints.maxHeight * 0.05;
-                double titleContainerHeight = constraints.maxHeight * 0.06;
-                double middleContainerHeight = constraints.maxHeight * 0.478;
+                double topContainerHeight = constraints.maxHeight * 0.06;
+                double titleContainerHeight = constraints.maxHeight * 0.079;
+                double middleContainerHeight = constraints.maxHeight * 0.4935;
                 return Column(
                   children: [
                     Container(
@@ -69,10 +69,6 @@ class SenderosScreen extends StatelessWidget {
                               );
                             },
                           ),
-                          IconButton(
-                            icon: Icon(Icons.search),
-                            onPressed: () {},
-                          ),
                         ],
                       ),
                     ),
@@ -81,11 +77,11 @@ class SenderosScreen extends StatelessWidget {
                       color: Colors.white,
                       child: Center(
                         child: Text(
-                          'Montañas de los Alpes',
+                          'Sendero Ecológico',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 18,
                           ),
                         ),
                       ),
@@ -98,7 +94,7 @@ class SenderosScreen extends StatelessWidget {
                           SizedBox(height: 20),
                           Container(
                             child: Text(
-                              'Sendero recorrido 2',
+                              'Sendero Corto',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -115,14 +111,15 @@ class SenderosScreen extends StatelessWidget {
                           Expanded(
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 20),
-                                child: Text(
-                                  '\nDescripción extensa del sendero recorrido. Puedes agregar mucho texto aquí y al llegar al final de la capacidad del contenedor, podrás hacer scroll para seguir leyendo. \n\nEsta es una forma muy útil para mostrar información que no cabe en el espacio visual disponible en pantalla.\n\n'
-                                      'Descripción extensa del sendero recorrido. Puedes agregar mucho texto aquí y al llegar al final de la capacidad del contenedor, podrás hacer scroll para seguir leyendo.\n\nEsta es una forma muy útil para mostrar información que no cabe en el espacio visual disponible en pantalla.',
-                                  style: TextStyle(
-                                    color: Color(0xff8a8a8a),
-                                    fontSize: 16,
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: RichText(
+                                  textAlign: TextAlign.justify,
+                                  text: TextSpan(
+                                    text: '\nEn este recorrido comenzarás explorando el fascinante mundo de la lombricomposta, aprendiendo sobre la transformación de desechos orgánicos en abono. Luego, pasarás al huerto familiar para entender las técnicas de cultivo casero, seguido de una visita al invernadero, donde se controlan las condiciones ambientales para optimizar el crecimiento de las plantas.\n\nContinuarás con el riego eficiente, descubriendo sistemas como el riego por goteo que ayudan a conservar el agua. A continuación, encontrarás el reservorio de agua, aprendiendo sobre la recolección y almacenamiento del agua de lluvia, vital en la gestión sostenible de recursos hídricos.\n\nLa apicultura te revelará la importancia de las abejas en la polinización y la biodiversidad, seguida por el sistema silvopastoril, que integra árboles, pastos y ganado en un ecosistema equilibrado. Luego, el sistema silvoagrícola te mostrará la colaboración entre la agricultura y la arboricultura.\n\nFinalmente, terminarás tu recorrido aprendiendo sobre la agricultura de conservación, que combina técnicas de cultivo sostenibles con alta productividad. Este recorrido en realidad aumentada no solo es educativo, sino también una ventana a prácticas ecológicas y sostenibles en la agricultura y la gestión de recursos naturales.',
+                                    style: TextStyle(
+                                      color: Color(0xff8a8a8a),
+                                      fontSize: 17,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -144,15 +141,14 @@ class SenderosScreen extends StatelessWidget {
                                   onTapAction: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Galeria2()),
+                                      MaterialPageRoute(builder: (context) => VideoScreen(videoAssetPath: 'assets/Videos/Video1.mp4')),
                                     );
                                   },
                                 ),
                               ),
                               Expanded(
                                 child: _circleContainer(
-                                  backgroundImage: 'ima/recorrido2.jpeg',
+                                  backgroundImage: 'ima/recorrido.jpg',
                                   circleImage: 'ima/camaraa.png',
                                   onTapAction: () {
                                     Navigator.push(
@@ -190,7 +186,7 @@ class SenderosScreen extends StatelessWidget {
                                       'Información de Ruta',
                                       style: TextStyle(
                                           color: Color(0xffd9d9d9),
-                                          fontSize: 16),
+                                          fontSize: 14),
                                     ),
                                   ],
                                 ),
@@ -201,7 +197,7 @@ class SenderosScreen extends StatelessWidget {
                             onTap: () {
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (_) => ARSendero2()),
+                                MaterialPageRoute(builder: (_) => ARSendero1()),
                               );
                             },
                             child: Container(

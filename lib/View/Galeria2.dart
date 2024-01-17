@@ -10,19 +10,24 @@ class Galeria2 extends StatefulWidget {
 
 class _Galeria2State extends State<Galeria2> {
   List<String> imagenes = [
-    'ima/recorrido.jpg',
-    'ima/recorrio2.jpeg',
-    'ima/img.png',
-    'ima/recorrido.jpg',
-    'ima/recorrio2.jpeg',
-    'ima/img.png',
-    'ima/recorrido.jpg',
-    'ima/recorrio2.jpeg',
-    'ima/img.png',
-    'ima/recorrido.jpg',
-    'ima/recorrio2.jpeg',
-    'ima/img.png',
-
+    'ima/ruta22.jpg',
+    'ima/ruta23.jpg',
+    'ima/ruta10.jpg',
+    'ima/ruta3.jpg',
+    'ima/ruta2.jpg',
+    'ima/ruta29.jpg',
+    'ima/ruta5.jpg',
+    'ima/ruta6.jpg',
+    'ima/ruta16.jpg',
+    'ima/ruta18.jpg',
+    'ima/ruta19.jpg',
+    'ima/ruta20.jpg',
+    'ima/ruta14.jpg',
+    'ima/ruta25.jpg',
+    'ima/ruta9.jpg',
+    'ima/ruta7.jpg',
+    'ima/ruta17.jpg',
+    'ima/ruta24.jpg',
   ];
 
   void _openPhotoGallery(BuildContext context, int index) {
@@ -54,9 +59,10 @@ class _Galeria2State extends State<Galeria2> {
         backgroundColor: Color(0xffd9d9d9),
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-          'Galería Sendero 1',
+          'Galería',
           style: TextStyle(color: Colors.black),
         ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: GridView.builder(
